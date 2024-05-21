@@ -15,7 +15,7 @@ namespace Desktop_44905165
     public partial class frmMain : MaterialForm
     {
         DataHandler handler;
-
+        
         public frmMain()
         {
             InitializeComponent();
