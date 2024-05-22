@@ -72,16 +72,23 @@ namespace Desktop_44905165
             DisplayAppointments();
         }
 
-        private void btnMove_Click(object sender, EventArgs e)
+        private bool ValidStatus(string action)
         {
-            // check appointment status
+            // checks appointment status for validation
             string status = GetAppointmentValue("Status");
 
             if (status != "Open")
             {
-                MessageBox.Show("Only open appointments may be moved", "Check Appointment Status", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
+                MessageBox.Show($"Only open appointments may be {action}", "Check Appointment Status", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return false;
             }
+
+            return true;
+        }
+
+        private void btnMove_Click(object sender, EventArgs e)
+        {
+            if (!ValidStatus("moved")) return;
 
             // open date and time picker form
             frmSelectDate selectDate = new frmSelectDate();
@@ -105,6 +112,36 @@ namespace Desktop_44905165
 
             handler.ExecuteUpdate(cmd);
 
+            // refresh datagridview
+            DisplayAppointments();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            if (!ValidStatus("cancelled")) return;
+
+            // open cancellation reason form
+            frmCancelAppointment cancel = new frmCancelAppointment();
+            cancel.ShowDialog();
+
+            if (!cancel.isSelected)
+            {
+                MessageBox.Show("No reason selected", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string reason = cancel.reason;
+
+            // update appointment status
+            string sql = @"update appointment set status = @status where id = @id";
+            SqlCommand cmd = new SqlCommand(sql, handler.GetSqlConnection());
+
+            cmd.Parameters.AddWithValue("@status", reason);
+            cmd.Parameters.AddWithValue("@id", int.Parse(GetAppointmentValue("ap_id")));
+
+            handler.ExecuteUpdate(cmd);
+
+            // refresh datagridview
             DisplayAppointments();
         }
     }

@@ -22,7 +22,7 @@ namespace Desktop_44905165
             try
             {
                 // get path to database - this is specific to the folder structure of the parent folder
-                // this prevents errors related to database copies when using |DataDirectory|
+                // this prevents problems related to database copies when using |DataDirectory|
                 string parentFolder = AppDomain.CurrentDomain.BaseDirectory;
                 string relativePath = @"..\..\BrightonMedical.mdf";
                 string databasePath = Path.GetFullPath(Path.Combine(parentFolder, relativePath));
