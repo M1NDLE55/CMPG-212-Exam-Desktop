@@ -13,7 +13,7 @@ namespace Desktop_44905165
 {
     internal class DataHandler
     {
-        private SqlConnection conn;
+        public SqlConnection conn { get; set; }
         private SqlDataAdapter adapter;
         private DataSet ds;
 
@@ -22,7 +22,7 @@ namespace Desktop_44905165
             try
             {
                 // get path to database - this is specific to the folder structure of the parent folder
-                // this prevents problems related to database copies when using |DataDirectory|
+                // this prevents problems related to database copy in output directory when using |DataDirectory|
                 string parentFolder = AppDomain.CurrentDomain.BaseDirectory;
                 string relativePath = @"..\..\BrightonMedical.mdf";
                 string databasePath = Path.GetFullPath(Path.Combine(parentFolder, relativePath));
@@ -38,11 +38,6 @@ namespace Desktop_44905165
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 System.Diagnostics.Debug.WriteLine(ex.Message);
             }
-        }
-
-        public SqlConnection GetSqlConnection()
-        {
-            return conn;
         }
 
         public bool Login(string username, string password)
@@ -86,7 +81,7 @@ namespace Desktop_44905165
         {
             try
             {
-                // uses sql statement with or without parameters to fill referenced datagridview
+                // uses sql select statement to fill referenced datagridview
                 conn.Open();     
                 
                 ds.Clear();
@@ -113,7 +108,7 @@ namespace Desktop_44905165
         {
             try
             {
-                // uses sql statement with or without parameters to update database
+                // uses sql update statement to update database
                 conn.Open();
 
                 adapter.UpdateCommand = cmd;
@@ -128,6 +123,49 @@ namespace Desktop_44905165
                 // error message
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
+        }
+
+        public string[] GetRowValues(SqlCommand cmd)
+        {
+            // returns array with fields in row
+
+            string[] data = new string[100];
+
+            try
+            {
+                conn.Open();
+
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                // create array with values of row
+                if (dr.Read())
+                {
+                    // get number of fields in row
+                    int fields = dr.FieldCount;
+
+                    for(int i = 0; i < fields; i++)
+                    {
+                        data[i] = dr[i].ToString();
+                    }
+
+                    cmd.Dispose();
+                    conn.Close();
+                    return data;
+                }
+                else
+                {
+                    cmd.Dispose();
+                    conn.Close();
+                    return null;
+                }             
+            }
+            catch (SqlException ex)
+            {
+                // error message
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                return null;
             }
         }
     }

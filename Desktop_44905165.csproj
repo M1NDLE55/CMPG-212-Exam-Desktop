@@ -74,6 +74,12 @@
     <Compile Include="frmCancelAppointment.Designer.cs">
       <DependentUpon>frmCancelAppointment.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmCompleteAppointment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCompleteAppointment.Designer.cs">
+      <DependentUpon>frmCompleteAppointment.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,6 +102,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmCancelAppointment.resx">
       <DependentUpon>frmCancelAppointment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCompleteAppointment.resx">
+      <DependentUpon>frmCompleteAppointment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>

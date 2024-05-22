@@ -43,7 +43,7 @@ namespace Desktop_44905165
                     "join patient pa on ap.patient_id = pa.id " +
                     "join [procedure] pr on ap.procedure_id = pr.id";
 
-            SqlCommand cmd = new SqlCommand(sql, handler.GetSqlConnection());
+            SqlCommand cmd = new SqlCommand(sql, handler.conn);
 
             // populate datagridview
             handler.FillDataGridView(cmd, ref dgvAppointments);
@@ -105,7 +105,7 @@ namespace Desktop_44905165
 
             // update appointment date
             string sql = @"update appointment set booking_time = @newDate where id = @id";
-            SqlCommand cmd = new SqlCommand(sql,handler.GetSqlConnection());
+            SqlCommand cmd = new SqlCommand(sql,handler.conn);
 
             cmd.Parameters.AddWithValue("@newDate", newDate);
             cmd.Parameters.AddWithValue("@id", int.Parse(GetAppointmentValue("ap_id")));
@@ -134,7 +134,7 @@ namespace Desktop_44905165
 
             // update appointment status
             string sql = @"update appointment set status = @status where id = @id";
-            SqlCommand cmd = new SqlCommand(sql, handler.GetSqlConnection());
+            SqlCommand cmd = new SqlCommand(sql, handler.conn);
 
             cmd.Parameters.AddWithValue("@status", reason);
             cmd.Parameters.AddWithValue("@id", int.Parse(GetAppointmentValue("ap_id")));
@@ -143,6 +143,19 @@ namespace Desktop_44905165
 
             // refresh datagridview
             DisplayAppointments();
+        }
+
+        private void btnComplete_Click(object sender, EventArgs e)
+        {
+            if (!ValidStatus("completed")) return;
+
+            // open complete appointment form
+            frmCompleteAppointment complete = new frmCompleteAppointment();
+            // pass application id for invoice creation
+            complete.ap_id = int.Parse(GetAppointmentValue("ap_id"));
+            complete.ShowDialog();
+
+
         }
     }
 }
