@@ -30,11 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             this.card = new MaterialSkin.Controls.MaterialCard();
-            this.txtUsername = new MaterialSkin.Controls.MaterialTextBox2();
-            this.txtPassword = new MaterialSkin.Controls.MaterialTextBox2();
-            this.lblUsername = new MaterialSkin.Controls.MaterialLabel();
-            this.lblPassword = new MaterialSkin.Controls.MaterialLabel();
             this.btnLogin = new MaterialSkin.Controls.MaterialButton();
+            this.lblPassword = new MaterialSkin.Controls.MaterialLabel();
+            this.lblUsername = new MaterialSkin.Controls.MaterialLabel();
+            this.txtPassword = new MaterialSkin.Controls.MaterialTextBox2();
+            this.txtUsername = new MaterialSkin.Controls.MaterialTextBox2();
             this.errProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.card.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errProvider)).BeginInit();
@@ -58,35 +58,51 @@
             this.card.Size = new System.Drawing.Size(324, 378);
             this.card.TabIndex = 0;
             // 
-            // txtUsername
+            // btnLogin
             // 
-            this.txtUsername.AnimateReadOnly = false;
-            this.txtUsername.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.txtUsername.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.txtUsername.Depth = 0;
-            this.txtUsername.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.txtUsername.HideSelection = true;
-            this.txtUsername.Hint = "Enter your username";
-            this.txtUsername.LeadingIcon = null;
-            this.txtUsername.LeaveOnEnterKey = true;
-            this.txtUsername.Location = new System.Drawing.Point(17, 68);
-            this.txtUsername.MaxLength = 32767;
-            this.txtUsername.MouseState = MaterialSkin.MouseState.OUT;
-            this.txtUsername.Name = "txtUsername";
-            this.txtUsername.PasswordChar = '\0';
-            this.txtUsername.PrefixSuffixText = null;
-            this.txtUsername.ReadOnly = false;
-            this.txtUsername.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.txtUsername.SelectedText = "";
-            this.txtUsername.SelectionLength = 0;
-            this.txtUsername.SelectionStart = 0;
-            this.txtUsername.ShortcutsEnabled = true;
-            this.txtUsername.Size = new System.Drawing.Size(290, 48);
-            this.txtUsername.TabIndex = 1;
-            this.txtUsername.TabStop = false;
-            this.txtUsername.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.txtUsername.TrailingIcon = null;
-            this.txtUsername.UseSystemPasswordChar = false;
+            this.btnLogin.AutoSize = false;
+            this.btnLogin.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnLogin.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnLogin.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnLogin.Depth = 0;
+            this.btnLogin.HighEmphasis = true;
+            this.btnLogin.Icon = null;
+            this.btnLogin.Location = new System.Drawing.Point(17, 265);
+            this.btnLogin.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnLogin.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnLogin.Size = new System.Drawing.Size(288, 36);
+            this.btnLogin.TabIndex = 4;
+            this.btnLogin.Text = "Login";
+            this.btnLogin.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnLogin.UseAccentColor = false;
+            this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            // 
+            // lblPassword
+            // 
+            this.lblPassword.AutoSize = true;
+            this.lblPassword.Depth = 0;
+            this.lblPassword.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblPassword.Location = new System.Drawing.Point(17, 147);
+            this.lblPassword.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblPassword.Name = "lblPassword";
+            this.lblPassword.Size = new System.Drawing.Size(75, 19);
+            this.lblPassword.TabIndex = 2;
+            this.lblPassword.Text = "Password:";
+            // 
+            // lblUsername
+            // 
+            this.lblUsername.AutoSize = true;
+            this.lblUsername.Depth = 0;
+            this.lblUsername.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblUsername.Location = new System.Drawing.Point(17, 46);
+            this.lblUsername.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblUsername.Name = "lblUsername";
+            this.lblUsername.Size = new System.Drawing.Size(76, 19);
+            this.lblUsername.TabIndex = 0;
+            this.lblUsername.Text = "Username:";
             // 
             // txtPassword
             // 
@@ -117,51 +133,35 @@
             this.txtPassword.TrailingIcon = null;
             this.txtPassword.UseSystemPasswordChar = true;
             // 
-            // lblUsername
+            // txtUsername
             // 
-            this.lblUsername.AutoSize = true;
-            this.lblUsername.Depth = 0;
-            this.lblUsername.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblUsername.Location = new System.Drawing.Point(17, 46);
-            this.lblUsername.MouseState = MaterialSkin.MouseState.HOVER;
-            this.lblUsername.Name = "lblUsername";
-            this.lblUsername.Size = new System.Drawing.Size(76, 19);
-            this.lblUsername.TabIndex = 0;
-            this.lblUsername.Text = "Username:";
-            // 
-            // lblPassword
-            // 
-            this.lblPassword.AutoSize = true;
-            this.lblPassword.Depth = 0;
-            this.lblPassword.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblPassword.Location = new System.Drawing.Point(17, 147);
-            this.lblPassword.MouseState = MaterialSkin.MouseState.HOVER;
-            this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(75, 19);
-            this.lblPassword.TabIndex = 2;
-            this.lblPassword.Text = "Password:";
-            // 
-            // btnLogin
-            // 
-            this.btnLogin.AutoSize = false;
-            this.btnLogin.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnLogin.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnLogin.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnLogin.Depth = 0;
-            this.btnLogin.HighEmphasis = true;
-            this.btnLogin.Icon = null;
-            this.btnLogin.Location = new System.Drawing.Point(17, 265);
-            this.btnLogin.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnLogin.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnLogin.Name = "btnLogin";
-            this.btnLogin.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnLogin.Size = new System.Drawing.Size(288, 36);
-            this.btnLogin.TabIndex = 4;
-            this.btnLogin.Text = "Login";
-            this.btnLogin.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnLogin.UseAccentColor = false;
-            this.btnLogin.UseVisualStyleBackColor = true;
-            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            this.txtUsername.AnimateReadOnly = false;
+            this.txtUsername.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtUsername.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtUsername.Depth = 0;
+            this.txtUsername.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtUsername.HideSelection = true;
+            this.txtUsername.Hint = "Enter your username";
+            this.txtUsername.LeadingIcon = null;
+            this.txtUsername.LeaveOnEnterKey = true;
+            this.txtUsername.Location = new System.Drawing.Point(17, 68);
+            this.txtUsername.MaxLength = 32767;
+            this.txtUsername.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtUsername.Name = "txtUsername";
+            this.txtUsername.PasswordChar = '\0';
+            this.txtUsername.PrefixSuffixText = null;
+            this.txtUsername.ReadOnly = false;
+            this.txtUsername.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtUsername.SelectedText = "";
+            this.txtUsername.SelectionLength = 0;
+            this.txtUsername.SelectionStart = 0;
+            this.txtUsername.ShortcutsEnabled = true;
+            this.txtUsername.Size = new System.Drawing.Size(290, 48);
+            this.txtUsername.TabIndex = 1;
+            this.txtUsername.TabStop = false;
+            this.txtUsername.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtUsername.TrailingIcon = null;
+            this.txtUsername.UseSystemPasswordChar = false;
             // 
             // errProvider
             // 
