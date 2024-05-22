@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,8 +21,14 @@ namespace Desktop_44905165
         {
             try
             {
+                // get path to database - this is specific to the folder structure of the parent folder
+                // this prevents errors related to database copies when using |DataDirectory|
+                string parentFolder = AppDomain.CurrentDomain.BaseDirectory;
+                string relativePath = @"..\..\BrightonMedical.mdf";
+                string databasePath = Path.GetFullPath(Path.Combine(parentFolder, relativePath));
+
                 // connect to database
-                conn = new SqlConnection($@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\BrightonMedical.mdf;Integrated Security=True");
+                conn = new SqlConnection($@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename={databasePath};Integrated Security=True");       
                 adapter = new SqlDataAdapter();
                 ds = new DataSet();
             }
