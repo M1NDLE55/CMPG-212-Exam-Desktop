@@ -28,14 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.materialTab = new MaterialSkin.Controls.MaterialTabControl();
             this.tabViewAppointments = new System.Windows.Forms.TabPage();
-            this.cardViewBg = new MaterialSkin.Controls.MaterialCard();
             this.lblActions = new MaterialSkin.Controls.MaterialLabel();
             this.lblAppointments = new MaterialSkin.Controls.MaterialLabel();
             this.cardActions = new MaterialSkin.Controls.MaterialCard();
+            this.btnRemove = new MaterialSkin.Controls.MaterialButton();
             this.btnMove = new MaterialSkin.Controls.MaterialButton();
             this.btnCancel = new MaterialSkin.Controls.MaterialButton();
             this.btnComplete = new MaterialSkin.Controls.MaterialButton();
@@ -48,18 +48,12 @@
             this.lblFilter = new MaterialSkin.Controls.MaterialLabel();
             this.dgvAppointments = new System.Windows.Forms.DataGridView();
             this.tabCreateAppointment = new System.Windows.Forms.TabPage();
-            this.cardCreateBg = new MaterialSkin.Controls.MaterialCard();
             this.tabRegiser = new System.Windows.Forms.TabPage();
-            this.cardRegisterBg = new MaterialSkin.Controls.MaterialCard();
-            this.btnRemove = new MaterialSkin.Controls.MaterialButton();
             this.materialTab.SuspendLayout();
             this.tabViewAppointments.SuspendLayout();
-            this.cardViewBg.SuspendLayout();
             this.cardActions.SuspendLayout();
             this.cardGV.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAppointments)).BeginInit();
-            this.tabCreateAppointment.SuspendLayout();
-            this.tabRegiser.SuspendLayout();
             this.SuspendLayout();
             // 
             // materialTab
@@ -76,49 +70,34 @@
             this.materialTab.Name = "materialTab";
             this.materialTab.Padding = new System.Drawing.Point(0, 0);
             this.materialTab.SelectedIndex = 0;
-            this.materialTab.Size = new System.Drawing.Size(929, 512);
+            this.materialTab.Size = new System.Drawing.Size(929, 518);
             this.materialTab.TabIndex = 0;
             // 
             // tabViewAppointments
             // 
-            this.tabViewAppointments.Controls.Add(this.cardViewBg);
+            this.tabViewAppointments.BackColor = System.Drawing.SystemColors.Control;
+            this.tabViewAppointments.Controls.Add(this.lblActions);
+            this.tabViewAppointments.Controls.Add(this.lblAppointments);
+            this.tabViewAppointments.Controls.Add(this.cardActions);
+            this.tabViewAppointments.Controls.Add(this.cardGV);
             this.tabViewAppointments.Location = new System.Drawing.Point(4, 22);
             this.tabViewAppointments.Margin = new System.Windows.Forms.Padding(0);
             this.tabViewAppointments.Name = "tabViewAppointments";
-            this.tabViewAppointments.Size = new System.Drawing.Size(921, 486);
+            this.tabViewAppointments.Size = new System.Drawing.Size(921, 492);
             this.tabViewAppointments.TabIndex = 0;
             this.tabViewAppointments.Text = "View Appointments";
-            this.tabViewAppointments.UseVisualStyleBackColor = true;
             this.tabViewAppointments.Enter += new System.EventHandler(this.tabViewAppointments_Enter);
-            // 
-            // cardViewBg
-            // 
-            this.cardViewBg.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.cardViewBg.Controls.Add(this.lblActions);
-            this.cardViewBg.Controls.Add(this.lblAppointments);
-            this.cardViewBg.Controls.Add(this.cardActions);
-            this.cardViewBg.Controls.Add(this.cardGV);
-            this.cardViewBg.Depth = 0;
-            this.cardViewBg.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cardViewBg.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.cardViewBg.Location = new System.Drawing.Point(0, 0);
-            this.cardViewBg.Margin = new System.Windows.Forms.Padding(0);
-            this.cardViewBg.MouseState = MaterialSkin.MouseState.HOVER;
-            this.cardViewBg.Name = "cardViewBg";
-            this.cardViewBg.Padding = new System.Windows.Forms.Padding(14);
-            this.cardViewBg.Size = new System.Drawing.Size(921, 486);
-            this.cardViewBg.TabIndex = 0;
             // 
             // lblActions
             // 
             this.lblActions.AutoSize = true;
             this.lblActions.Depth = 0;
             this.lblActions.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblActions.Location = new System.Drawing.Point(17, 355);
+            this.lblActions.Location = new System.Drawing.Point(18, 360);
             this.lblActions.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblActions.Name = "lblActions";
             this.lblActions.Size = new System.Drawing.Size(54, 19);
-            this.lblActions.TabIndex = 2;
+            this.lblActions.TabIndex = 6;
             this.lblActions.Text = "Actions";
             // 
             // lblAppointments
@@ -126,11 +105,11 @@
             this.lblAppointments.AutoSize = true;
             this.lblAppointments.Depth = 0;
             this.lblAppointments.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblAppointments.Location = new System.Drawing.Point(17, 14);
+            this.lblAppointments.Location = new System.Drawing.Point(18, 19);
             this.lblAppointments.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblAppointments.Name = "lblAppointments";
             this.lblAppointments.Size = new System.Drawing.Size(100, 19);
-            this.lblAppointments.TabIndex = 0;
+            this.lblAppointments.TabIndex = 4;
             this.lblAppointments.Text = "Appointments";
             // 
             // cardActions
@@ -142,13 +121,34 @@
             this.cardActions.Controls.Add(this.btnComplete);
             this.cardActions.Depth = 0;
             this.cardActions.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.cardActions.Location = new System.Drawing.Point(20, 388);
-            this.cardActions.Margin = new System.Windows.Forms.Padding(14);
+            this.cardActions.Location = new System.Drawing.Point(21, 393);
+            this.cardActions.Margin = new System.Windows.Forms.Padding(14, 14, 14, 0);
             this.cardActions.MouseState = MaterialSkin.MouseState.HOVER;
             this.cardActions.Name = "cardActions";
             this.cardActions.Padding = new System.Windows.Forms.Padding(14);
             this.cardActions.Size = new System.Drawing.Size(881, 74);
-            this.cardActions.TabIndex = 3;
+            this.cardActions.TabIndex = 7;
+            // 
+            // btnRemove
+            // 
+            this.btnRemove.AutoSize = false;
+            this.btnRemove.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnRemove.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnRemove.Depth = 0;
+            this.btnRemove.HighEmphasis = true;
+            this.btnRemove.Icon = null;
+            this.btnRemove.Location = new System.Drawing.Point(648, 20);
+            this.btnRemove.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnRemove.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnRemove.Name = "btnRemove";
+            this.btnRemove.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnRemove.Size = new System.Drawing.Size(170, 36);
+            this.btnRemove.TabIndex = 3;
+            this.btnRemove.Text = "Remove";
+            this.btnRemove.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnRemove.UseAccentColor = false;
+            this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
             // btnMove
             // 
@@ -225,13 +225,13 @@
             this.cardGV.Controls.Add(this.dgvAppointments);
             this.cardGV.Depth = 0;
             this.cardGV.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.cardGV.Location = new System.Drawing.Point(20, 47);
+            this.cardGV.Location = new System.Drawing.Point(21, 52);
             this.cardGV.Margin = new System.Windows.Forms.Padding(14);
             this.cardGV.MouseState = MaterialSkin.MouseState.HOVER;
             this.cardGV.Name = "cardGV";
             this.cardGV.Padding = new System.Windows.Forms.Padding(14);
             this.cardGV.Size = new System.Drawing.Size(881, 294);
-            this.cardGV.TabIndex = 1;
+            this.cardGV.TabIndex = 5;
             // 
             // rdoNone
             // 
@@ -336,23 +336,23 @@
             this.dgvAppointments.AllowUserToDeleteRows = false;
             this.dgvAppointments.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvAppointments.BackgroundColor = System.Drawing.SystemColors.ControlLight;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Roboto", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvAppointments.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Roboto", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvAppointments.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.dgvAppointments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Roboto", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvAppointments.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Roboto", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvAppointments.DefaultCellStyle = dataGridViewCellStyle10;
             this.dgvAppointments.Location = new System.Drawing.Point(20, 17);
             this.dgvAppointments.Name = "dgvAppointments";
             this.dgvAppointments.ReadOnly = true;
@@ -362,80 +362,29 @@
             // 
             // tabCreateAppointment
             // 
-            this.tabCreateAppointment.Controls.Add(this.cardCreateBg);
+            this.tabCreateAppointment.BackColor = System.Drawing.SystemColors.Control;
             this.tabCreateAppointment.Location = new System.Drawing.Point(4, 22);
             this.tabCreateAppointment.Margin = new System.Windows.Forms.Padding(0);
             this.tabCreateAppointment.Name = "tabCreateAppointment";
             this.tabCreateAppointment.Size = new System.Drawing.Size(921, 486);
             this.tabCreateAppointment.TabIndex = 2;
             this.tabCreateAppointment.Text = "Create Appointment";
-            this.tabCreateAppointment.UseVisualStyleBackColor = true;
-            // 
-            // cardCreateBg
-            // 
-            this.cardCreateBg.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.cardCreateBg.Depth = 0;
-            this.cardCreateBg.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cardCreateBg.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.cardCreateBg.Location = new System.Drawing.Point(0, 0);
-            this.cardCreateBg.Margin = new System.Windows.Forms.Padding(0);
-            this.cardCreateBg.MouseState = MaterialSkin.MouseState.HOVER;
-            this.cardCreateBg.Name = "cardCreateBg";
-            this.cardCreateBg.Padding = new System.Windows.Forms.Padding(14);
-            this.cardCreateBg.Size = new System.Drawing.Size(921, 486);
-            this.cardCreateBg.TabIndex = 0;
             // 
             // tabRegiser
             // 
-            this.tabRegiser.Controls.Add(this.cardRegisterBg);
+            this.tabRegiser.BackColor = System.Drawing.SystemColors.Control;
             this.tabRegiser.Location = new System.Drawing.Point(4, 22);
             this.tabRegiser.Margin = new System.Windows.Forms.Padding(0);
             this.tabRegiser.Name = "tabRegiser";
             this.tabRegiser.Size = new System.Drawing.Size(921, 486);
             this.tabRegiser.TabIndex = 1;
             this.tabRegiser.Text = "Register Patient";
-            this.tabRegiser.UseVisualStyleBackColor = true;
-            // 
-            // cardRegisterBg
-            // 
-            this.cardRegisterBg.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.cardRegisterBg.Depth = 0;
-            this.cardRegisterBg.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cardRegisterBg.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.cardRegisterBg.Location = new System.Drawing.Point(0, 0);
-            this.cardRegisterBg.Margin = new System.Windows.Forms.Padding(0);
-            this.cardRegisterBg.MouseState = MaterialSkin.MouseState.HOVER;
-            this.cardRegisterBg.Name = "cardRegisterBg";
-            this.cardRegisterBg.Padding = new System.Windows.Forms.Padding(14);
-            this.cardRegisterBg.Size = new System.Drawing.Size(921, 486);
-            this.cardRegisterBg.TabIndex = 1;
-            // 
-            // btnRemove
-            // 
-            this.btnRemove.AutoSize = false;
-            this.btnRemove.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnRemove.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnRemove.Depth = 0;
-            this.btnRemove.HighEmphasis = true;
-            this.btnRemove.Icon = null;
-            this.btnRemove.Location = new System.Drawing.Point(648, 20);
-            this.btnRemove.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnRemove.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnRemove.Name = "btnRemove";
-            this.btnRemove.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnRemove.Size = new System.Drawing.Size(170, 36);
-            this.btnRemove.TabIndex = 3;
-            this.btnRemove.Text = "Remove";
-            this.btnRemove.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnRemove.UseAccentColor = false;
-            this.btnRemove.UseVisualStyleBackColor = true;
-            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(929, 576);
+            this.ClientSize = new System.Drawing.Size(929, 582);
             this.Controls.Add(this.materialTab);
             this.DrawerTabControl = this.materialTab;
             this.DrawerWidth = 220;
@@ -446,14 +395,11 @@
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.materialTab.ResumeLayout(false);
             this.tabViewAppointments.ResumeLayout(false);
-            this.cardViewBg.ResumeLayout(false);
-            this.cardViewBg.PerformLayout();
+            this.tabViewAppointments.PerformLayout();
             this.cardActions.ResumeLayout(false);
             this.cardGV.ResumeLayout(false);
             this.cardGV.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAppointments)).EndInit();
-            this.tabCreateAppointment.ResumeLayout(false);
-            this.tabRegiser.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -464,24 +410,21 @@
         private System.Windows.Forms.TabPage tabViewAppointments;
         private System.Windows.Forms.TabPage tabRegiser;
         private System.Windows.Forms.TabPage tabCreateAppointment;
-        private MaterialSkin.Controls.MaterialCard cardCreateBg;
-        private MaterialSkin.Controls.MaterialCard cardViewBg;
+        private MaterialSkin.Controls.MaterialLabel lblActions;
         private MaterialSkin.Controls.MaterialLabel lblAppointments;
         private MaterialSkin.Controls.MaterialCard cardActions;
+        private MaterialSkin.Controls.MaterialButton btnRemove;
         private MaterialSkin.Controls.MaterialButton btnMove;
         private MaterialSkin.Controls.MaterialButton btnCancel;
         private MaterialSkin.Controls.MaterialButton btnComplete;
         private MaterialSkin.Controls.MaterialCard cardGV;
-        private System.Windows.Forms.DataGridView dgvAppointments;
-        private MaterialSkin.Controls.MaterialLabel lblActions;
-        private MaterialSkin.Controls.MaterialCard cardRegisterBg;
+        private MaterialSkin.Controls.MaterialRadioButton rdoNone;
+        private MaterialSkin.Controls.MaterialRadioButton rdoOpen;
         private MaterialSkin.Controls.MaterialRadioButton rdoNoShow;
         private MaterialSkin.Controls.MaterialRadioButton rdoCancelled;
         private MaterialSkin.Controls.MaterialRadioButton rdoCompleted;
         private MaterialSkin.Controls.MaterialLabel lblFilter;
-        private MaterialSkin.Controls.MaterialRadioButton rdoNone;
-        private MaterialSkin.Controls.MaterialRadioButton rdoOpen;
-        private MaterialSkin.Controls.MaterialButton btnRemove;
+        private System.Windows.Forms.DataGridView dgvAppointments;
     }
 }
 
