@@ -34,16 +34,20 @@ namespace Desktop_44905165
             handler = new DataHandler();            
         }
 
-        private void DisplayAppointments() 
+        private void DisplayAppointments(string status = "") // add default param value instead of overloading function
         {
             // get appointment details
             string sql =
                     @"select concat(pa.name, concat(' ', pa.surname)) as Patient, pa.number as Contact, pr.name as [Procedure], ap.booking_time as Booking, ap.status as Status, ap.id as ap_id " +
                     "from appointment ap " +
                     "join patient pa on ap.patient_id = pa.id " +
-                    "join [procedure] pr on ap.procedure_id = pr.id";
+                    "join [procedure] pr on ap.procedure_id = pr.id " +
+                    // filter appointments by status
+                    (status != "" ? "where status = @status" : "");
 
             SqlCommand cmd = new SqlCommand(sql, handler.conn);
+
+            if (status != "") cmd.Parameters.AddWithValue("@status", status);
 
             // populate datagridview
             handler.FillDataGridView(cmd, ref dgvAppointments);
@@ -90,6 +94,8 @@ namespace Desktop_44905165
         {
             if (!ValidStatus("moved")) return;
 
+            int id = int.Parse(GetAppointmentValue("ap_id"));
+
             // open date and time picker form
             frmSelectDate selectDate = new frmSelectDate();
             selectDate.ShowDialog();
@@ -108,12 +114,26 @@ namespace Desktop_44905165
             SqlCommand cmd = new SqlCommand(sql,handler.conn);
 
             cmd.Parameters.AddWithValue("@newDate", newDate);
-            cmd.Parameters.AddWithValue("@id", int.Parse(GetAppointmentValue("ap_id")));
+            cmd.Parameters.AddWithValue("@id", id);
 
             handler.ExecuteUpdate(cmd);
 
             // refresh datagridview
             DisplayAppointments();
+        }
+
+        private void UpdateAppointmentStatus(string status)
+        {
+            int id = int.Parse(GetAppointmentValue("ap_id"));
+
+            // update appointment status
+            string sql = @"update appointment set status = @status where id = @id";
+            SqlCommand cmd = new SqlCommand(sql, handler.conn);
+
+            cmd.Parameters.AddWithValue("@status", status);
+            cmd.Parameters.AddWithValue("@id", id);
+
+            handler.ExecuteUpdate(cmd);
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -132,14 +152,7 @@ namespace Desktop_44905165
 
             string reason = cancel.reason;
 
-            // update appointment status
-            string sql = @"update appointment set status = @status where id = @id";
-            SqlCommand cmd = new SqlCommand(sql, handler.conn);
-
-            cmd.Parameters.AddWithValue("@status", reason);
-            cmd.Parameters.AddWithValue("@id", int.Parse(GetAppointmentValue("ap_id")));
-
-            handler.ExecuteUpdate(cmd);
+            UpdateAppointmentStatus(reason);
 
             // refresh datagridview
             DisplayAppointments();
@@ -149,13 +162,77 @@ namespace Desktop_44905165
         {
             if (!ValidStatus("completed")) return;
 
+            int ap_id = int.Parse(GetAppointmentValue("ap_id"));
+
             // open complete appointment form
             frmCompleteAppointment complete = new frmCompleteAppointment();
             // pass application id for invoice creation
-            complete.ap_id = int.Parse(GetAppointmentValue("ap_id"));
+            complete.ap_id = ap_id;
             complete.ShowDialog();
 
+            if (!complete.isCompleted)
+            {
+                MessageBox.Show("Invoice not completed", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
+            UpdateAppointmentStatus("Completed");
+
+            // refresh datagridview
+            DisplayAppointments();
         }
+
+        #region Filter appointments radio buttons
+
+        private void FilterAppointments()
+        {
+            if (rdoNone.Checked)
+            {
+                DisplayAppointments();
+            }
+            else if(rdoOpen.Checked)
+            {
+                DisplayAppointments("Open");
+            }
+            else if(rdoCompleted.Checked)
+            {
+                DisplayAppointments("Completed");
+            }
+            else if(rdoCancelled.Checked)
+            {
+                DisplayAppointments("Cancelled");
+            }
+            else if (rdoNoShow.Checked)
+            {
+                DisplayAppointments("No show");
+            }
+        }      
+
+        private void rdoNone_CheckedChanged(object sender, EventArgs e)
+        {
+            FilterAppointments();
+        }
+
+        private void rdoOpen_CheckedChanged(object sender, EventArgs e)
+        {
+            FilterAppointments();
+        }
+
+        private void rdoCompleted_CheckedChanged(object sender, EventArgs e)
+        {
+            FilterAppointments();
+        }
+
+        private void rdoCancelled_CheckedChanged(object sender, EventArgs e)
+        {
+            FilterAppointments();
+        }
+
+        private void rdoNoShow_CheckedChanged(object sender, EventArgs e)
+        {
+            FilterAppointments();
+        }
+
+        #endregion
     }
 }

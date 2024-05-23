@@ -30,9 +30,10 @@
         {
             this.lblInvoice = new MaterialSkin.Controls.MaterialLabel();
             this.cardInvoice = new MaterialSkin.Controls.MaterialCard();
+            this.rtbInvoice = new System.Windows.Forms.RichTextBox();
             this.btnSave = new MaterialSkin.Controls.MaterialButton();
             this.btnComplete = new MaterialSkin.Controls.MaterialButton();
-            this.rtbInvoice = new System.Windows.Forms.RichTextBox();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.cardInvoice.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,6 +63,18 @@
             this.cardInvoice.Padding = new System.Windows.Forms.Padding(14);
             this.cardInvoice.Size = new System.Drawing.Size(339, 288);
             this.cardInvoice.TabIndex = 1;
+            // 
+            // rtbInvoice
+            // 
+            this.rtbInvoice.BackColor = System.Drawing.Color.White;
+            this.rtbInvoice.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.rtbInvoice.Font = new System.Drawing.Font("Roboto", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtbInvoice.Location = new System.Drawing.Point(55, 17);
+            this.rtbInvoice.Name = "rtbInvoice";
+            this.rtbInvoice.ReadOnly = true;
+            this.rtbInvoice.Size = new System.Drawing.Size(232, 254);
+            this.rtbInvoice.TabIndex = 0;
+            this.rtbInvoice.Text = "";
             // 
             // btnSave
             // 
@@ -105,17 +118,9 @@
             this.btnComplete.UseVisualStyleBackColor = true;
             this.btnComplete.Click += new System.EventHandler(this.btnComplete_Click);
             // 
-            // rtbInvoice
+            // saveFileDialog
             // 
-            this.rtbInvoice.BackColor = System.Drawing.Color.White;
-            this.rtbInvoice.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.rtbInvoice.Font = new System.Drawing.Font("Roboto", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtbInvoice.Location = new System.Drawing.Point(55, 17);
-            this.rtbInvoice.Name = "rtbInvoice";
-            this.rtbInvoice.ReadOnly = true;
-            this.rtbInvoice.Size = new System.Drawing.Size(232, 254);
-            this.rtbInvoice.TabIndex = 0;
-            this.rtbInvoice.Text = "";
+            this.saveFileDialog.DefaultExt = "txt";
             // 
             // frmCompleteAppointment
             // 
@@ -145,5 +150,6 @@
         private MaterialSkin.Controls.MaterialButton btnSave;
         private MaterialSkin.Controls.MaterialButton btnComplete;
         private System.Windows.Forms.RichTextBox rtbInvoice;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
     }
 }

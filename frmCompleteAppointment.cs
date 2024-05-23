@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -72,12 +73,27 @@ namespace Desktop_44905165
         private void btnSave_Click(object sender, EventArgs e)
         {
             // write to text file
+            if(saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string file = saveFileDialog.FileName;
+
+                StreamWriter outputFile = new StreamWriter(file);
+
+                outputFile.Write(invoice);
+
+                outputFile.Close();
+
+                // confirmation
+                MessageBox.Show("Invoice successfully saved", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Invoice not saved", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void btnComplete_Click(object sender, EventArgs e)
         {
-            // ?? maybe insert invoice in a table
-
             isCompleted = true;
             Close();
         }

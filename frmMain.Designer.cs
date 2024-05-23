@@ -45,6 +45,12 @@
             this.cardCreateBg = new MaterialSkin.Controls.MaterialCard();
             this.tabRegiser = new System.Windows.Forms.TabPage();
             this.cardRegisterBg = new MaterialSkin.Controls.MaterialCard();
+            this.lblFilter = new MaterialSkin.Controls.MaterialLabel();
+            this.rdoCompleted = new MaterialSkin.Controls.MaterialRadioButton();
+            this.rdoCancelled = new MaterialSkin.Controls.MaterialRadioButton();
+            this.rdoNoShow = new MaterialSkin.Controls.MaterialRadioButton();
+            this.rdoOpen = new MaterialSkin.Controls.MaterialRadioButton();
+            this.rdoNone = new MaterialSkin.Controls.MaterialRadioButton();
             this.materialTab.SuspendLayout();
             this.tabViewAppointments.SuspendLayout();
             this.cardViewBg.SuspendLayout();
@@ -208,6 +214,12 @@
             // cardGV
             // 
             this.cardGV.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cardGV.Controls.Add(this.rdoNone);
+            this.cardGV.Controls.Add(this.rdoOpen);
+            this.cardGV.Controls.Add(this.rdoNoShow);
+            this.cardGV.Controls.Add(this.rdoCancelled);
+            this.cardGV.Controls.Add(this.rdoCompleted);
+            this.cardGV.Controls.Add(this.lblFilter);
             this.cardGV.Controls.Add(this.dgvAppointments);
             this.cardGV.Depth = 0;
             this.cardGV.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
@@ -246,7 +258,7 @@
             this.dgvAppointments.Name = "dgvAppointments";
             this.dgvAppointments.ReadOnly = true;
             this.dgvAppointments.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAppointments.Size = new System.Drawing.Size(847, 259);
+            this.dgvAppointments.Size = new System.Drawing.Size(684, 259);
             this.dgvAppointments.TabIndex = 0;
             // 
             // tabCreateAppointment
@@ -299,6 +311,104 @@
             this.cardRegisterBg.Size = new System.Drawing.Size(921, 486);
             this.cardRegisterBg.TabIndex = 1;
             // 
+            // lblFilter
+            // 
+            this.lblFilter.AutoSize = true;
+            this.lblFilter.Depth = 0;
+            this.lblFilter.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblFilter.Location = new System.Drawing.Point(734, 17);
+            this.lblFilter.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblFilter.Name = "lblFilter";
+            this.lblFilter.Size = new System.Drawing.Size(36, 19);
+            this.lblFilter.TabIndex = 1;
+            this.lblFilter.Text = "Filter";
+            // 
+            // rdoCompleted
+            // 
+            this.rdoCompleted.AutoSize = true;
+            this.rdoCompleted.Depth = 0;
+            this.rdoCompleted.Location = new System.Drawing.Point(737, 123);
+            this.rdoCompleted.Margin = new System.Windows.Forms.Padding(0);
+            this.rdoCompleted.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdoCompleted.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdoCompleted.Name = "rdoCompleted";
+            this.rdoCompleted.Ripple = true;
+            this.rdoCompleted.Size = new System.Drawing.Size(111, 37);
+            this.rdoCompleted.TabIndex = 2;
+            this.rdoCompleted.TabStop = true;
+            this.rdoCompleted.Text = "Completed";
+            this.rdoCompleted.UseVisualStyleBackColor = true;
+            this.rdoCompleted.CheckedChanged += new System.EventHandler(this.rdoCompleted_CheckedChanged);
+            // 
+            // rdoCancelled
+            // 
+            this.rdoCancelled.AutoSize = true;
+            this.rdoCancelled.Depth = 0;
+            this.rdoCancelled.Location = new System.Drawing.Point(737, 160);
+            this.rdoCancelled.Margin = new System.Windows.Forms.Padding(0);
+            this.rdoCancelled.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdoCancelled.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdoCancelled.Name = "rdoCancelled";
+            this.rdoCancelled.Ripple = true;
+            this.rdoCancelled.Size = new System.Drawing.Size(104, 37);
+            this.rdoCancelled.TabIndex = 3;
+            this.rdoCancelled.TabStop = true;
+            this.rdoCancelled.Text = "Cancelled";
+            this.rdoCancelled.UseVisualStyleBackColor = true;
+            this.rdoCancelled.CheckedChanged += new System.EventHandler(this.rdoCancelled_CheckedChanged);
+            // 
+            // rdoNoShow
+            // 
+            this.rdoNoShow.AutoSize = true;
+            this.rdoNoShow.Depth = 0;
+            this.rdoNoShow.Location = new System.Drawing.Point(737, 197);
+            this.rdoNoShow.Margin = new System.Windows.Forms.Padding(0);
+            this.rdoNoShow.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdoNoShow.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdoNoShow.Name = "rdoNoShow";
+            this.rdoNoShow.Ripple = true;
+            this.rdoNoShow.Size = new System.Drawing.Size(99, 37);
+            this.rdoNoShow.TabIndex = 4;
+            this.rdoNoShow.TabStop = true;
+            this.rdoNoShow.Text = "No Show";
+            this.rdoNoShow.UseVisualStyleBackColor = true;
+            this.rdoNoShow.CheckedChanged += new System.EventHandler(this.rdoNoShow_CheckedChanged);
+            // 
+            // rdoOpen
+            // 
+            this.rdoOpen.AutoSize = true;
+            this.rdoOpen.Depth = 0;
+            this.rdoOpen.Location = new System.Drawing.Point(737, 86);
+            this.rdoOpen.Margin = new System.Windows.Forms.Padding(0);
+            this.rdoOpen.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdoOpen.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdoOpen.Name = "rdoOpen";
+            this.rdoOpen.Ripple = true;
+            this.rdoOpen.Size = new System.Drawing.Size(72, 37);
+            this.rdoOpen.TabIndex = 5;
+            this.rdoOpen.TabStop = true;
+            this.rdoOpen.Text = "Open";
+            this.rdoOpen.UseVisualStyleBackColor = true;
+            this.rdoOpen.CheckedChanged += new System.EventHandler(this.rdoOpen_CheckedChanged);
+            // 
+            // rdoNone
+            // 
+            this.rdoNone.AutoSize = true;
+            this.rdoNone.Checked = true;
+            this.rdoNone.Depth = 0;
+            this.rdoNone.Location = new System.Drawing.Point(737, 49);
+            this.rdoNone.Margin = new System.Windows.Forms.Padding(0);
+            this.rdoNone.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdoNone.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdoNone.Name = "rdoNone";
+            this.rdoNone.Ripple = true;
+            this.rdoNone.Size = new System.Drawing.Size(72, 37);
+            this.rdoNone.TabIndex = 6;
+            this.rdoNone.TabStop = true;
+            this.rdoNone.Text = "None";
+            this.rdoNone.UseVisualStyleBackColor = true;
+            this.rdoNone.CheckedChanged += new System.EventHandler(this.rdoNone_CheckedChanged);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -318,6 +428,7 @@
             this.cardViewBg.PerformLayout();
             this.cardActions.ResumeLayout(false);
             this.cardGV.ResumeLayout(false);
+            this.cardGV.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAppointments)).EndInit();
             this.tabCreateAppointment.ResumeLayout(false);
             this.tabRegiser.ResumeLayout(false);
@@ -342,6 +453,12 @@
         private System.Windows.Forms.DataGridView dgvAppointments;
         private MaterialSkin.Controls.MaterialLabel lblActions;
         private MaterialSkin.Controls.MaterialCard cardRegisterBg;
+        private MaterialSkin.Controls.MaterialRadioButton rdoNoShow;
+        private MaterialSkin.Controls.MaterialRadioButton rdoCancelled;
+        private MaterialSkin.Controls.MaterialRadioButton rdoCompleted;
+        private MaterialSkin.Controls.MaterialLabel lblFilter;
+        private MaterialSkin.Controls.MaterialRadioButton rdoNone;
+        private MaterialSkin.Controls.MaterialRadioButton rdoOpen;
     }
 }
 
