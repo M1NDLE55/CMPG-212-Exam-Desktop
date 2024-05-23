@@ -88,9 +88,9 @@
             this.lblPassword.Location = new System.Drawing.Point(17, 147);
             this.lblPassword.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(75, 19);
+            this.lblPassword.Size = new System.Drawing.Size(71, 19);
             this.lblPassword.TabIndex = 2;
-            this.lblPassword.Text = "Password:";
+            this.lblPassword.Text = "Password";
             // 
             // lblUsername
             // 
@@ -100,9 +100,9 @@
             this.lblUsername.Location = new System.Drawing.Point(17, 46);
             this.lblUsername.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblUsername.Name = "lblUsername";
-            this.lblUsername.Size = new System.Drawing.Size(76, 19);
+            this.lblUsername.Size = new System.Drawing.Size(72, 19);
             this.lblUsername.TabIndex = 0;
-            this.lblUsername.Text = "Username:";
+            this.lblUsername.Text = "Username";
             // 
             // txtPassword
             // 

@@ -8,9 +8,12 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace Desktop_44905165
 {
@@ -351,6 +354,171 @@ namespace Desktop_44905165
             if (handlerCreate.ExecuteInsert(cmd))
             {
                 MessageBox.Show("Appointment created", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnAddPatient_Click(object sender, EventArgs e)
+        {
+            string
+                name = txtName.Text,
+                surname = txtSurname.Text,
+                number = txtNumber.Text,
+                email = txtEmail.Text,
+                emergency = txtEmergency.Text;
+
+            // input validation
+            bool hasError = false;
+            errProvider.Clear();
+
+            // name
+            if (string.IsNullOrEmpty(name))
+            {
+                errProvider.SetError(txtName, "Required*");
+                txtName.Focus();
+                hasError = true;
+            }
+
+            // surname
+            if (string.IsNullOrEmpty(surname))
+            {
+                errProvider.SetError(txtSurname, "Required*");
+                txtSurname.Focus();
+                hasError = true;
+            }
+
+            // number
+            Regex numberRegex = new Regex(@"^\d{10}$");
+
+            if (string.IsNullOrEmpty(number))
+            {
+                errProvider.SetError(txtNumber, "Required*");
+                txtNumber.Focus();
+                hasError = true;
+            }
+            else if (!numberRegex.IsMatch(number))
+            {
+                errProvider.SetError(txtNumber, "Invalid format*");
+                txtNumber.Focus();
+                hasError = true;
+            }
+            
+            // emergency number
+            if (string.IsNullOrEmpty(emergency))
+            {
+                errProvider.SetError(txtEmergency, "Required*");
+                txtEmergency.Focus();
+                hasError = true;
+            }
+            else if (!numberRegex.IsMatch(emergency))
+            {
+                errProvider.SetError(txtEmergency, "Invalid format*");
+                txtEmergency.Focus();
+                hasError = true;
+            }
+
+            // email
+            Regex emailRegex = new Regex(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
+
+            if (string.IsNullOrEmpty(email))
+            {
+                errProvider.SetError(txtEmail, "Required*");
+                txtEmail.Focus();
+                hasError = true;
+            }
+            else if (!emailRegex.IsMatch(email))
+            {
+                errProvider.SetError(txtEmail, "Invalid format*");
+                txtEmail.Focus();
+                hasError = true;
+            }
+
+            if (hasError) return;
+
+            // get allergies - ensure no duplicates
+            HashSet<string> allergies = new HashSet<string>();
+
+            for (int i = 0; i < lstAllergies.Items.Count; i++)
+            {
+                allergies.Add(lstAllergies.Items[i].Text.ToString());
+            }
+           
+
+            // create new patient
+            string sqlPatient =
+                @"insert into patient (name, surname, number, email, emergency_contact) " +
+                "values (@name, @surname, @number, @email, @emergency_contact)";
+
+            SqlCommand cmdPatient = new SqlCommand(sqlPatient, handlerPatient.conn);
+
+            cmdPatient.Parameters.AddWithValue("@name", name);
+            cmdPatient.Parameters.AddWithValue("@surname", surname);
+            cmdPatient.Parameters.AddWithValue("@number", number);
+            cmdPatient.Parameters.AddWithValue("@email", email);
+            cmdPatient.Parameters.AddWithValue("@emergency_contact", emergency);
+
+            // only continue if patient was inserted correctly
+            if (!handlerPatient.ExecuteInsert(cmdPatient))
+            {
+                MessageBox.Show("Something unexpected happend", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // get new patient's id to reduce query load in loop
+            SqlCommand cmdID = new SqlCommand(@"select id from patient where email = @email", handlerPatient.conn);
+            cmdID.Parameters.AddWithValue("@email", email);
+
+            int patientID = int.Parse(handlerPatient.GetRowValues(cmdID)[0]);
+
+            // add allergies
+            foreach (string allergy in allergies)
+            {
+                SqlCommand cmdAllergy = new SqlCommand(@"insert into allergy (patient_id, allergy) values (@patient_id, @allergy)", handlerPatient.conn);
+
+                cmdAllergy.Parameters.AddWithValue("@patient_id", patientID);
+                cmdAllergy.Parameters.AddWithValue("@allergy", allergy);
+
+                handlerPatient.ExecuteInsert(cmdAllergy);
+            }
+
+            MessageBox.Show("Patient added", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            // clear input
+            txtName.Clear();
+            txtSurname.Clear();
+            txtNumber.Clear();
+            txtEmail.Clear();
+            txtEmergency.Clear();
+            lstAllergies.Clear();
+        }
+
+        private void btnAddAllergy_Click(object sender, EventArgs e)
+        {
+            string allergy = txtAllergy.Text;
+
+            // validation
+            if (string.IsNullOrEmpty(allergy))
+            {
+                errProvider.SetError(txtAllergy, "Required*");
+                txtAllergy.Focus();
+                return;
+            }
+
+            // add allergy to list box
+            lstAllergies.Items.Add(new MaterialListBoxItem(allergy));
+            txtAllergy.Clear();
+            txtAllergy.Focus();
+        }
+
+        private void btnRemoveAllergy_Click(object sender, EventArgs e)
+        {
+            // remove an allergy
+            if (lstAllergies.Items.Count > 0 && lstAllergies.SelectedIndex >= 0)
+            {
+                lstAllergies.Items.RemoveAt(lstAllergies.SelectedIndex);
+            }
+            else
+            {
+                MessageBox.Show("Select an allergy", "No Allergy Selected", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

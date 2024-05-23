@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.materialTab = new MaterialSkin.Controls.MaterialTabControl();
             this.tabViewAppointments = new System.Windows.Forms.TabPage();
             this.lblActions = new MaterialSkin.Controls.MaterialLabel();
@@ -64,6 +65,28 @@
             this.cmbEmail = new MaterialSkin.Controls.MaterialComboBox();
             this.lblPatient = new MaterialSkin.Controls.MaterialLabel();
             this.tabRegiser = new System.Windows.Forms.TabPage();
+            this.cardAllergies = new MaterialSkin.Controls.MaterialCard();
+            this.txtAllergy = new MaterialSkin.Controls.MaterialTextBox2();
+            this.lblAllergies = new MaterialSkin.Controls.MaterialLabel();
+            this.cardDetails = new MaterialSkin.Controls.MaterialCard();
+            this.lblEmergency = new MaterialSkin.Controls.MaterialLabel();
+            this.txtEmergency = new MaterialSkin.Controls.MaterialTextBox2();
+            this.lblEmail = new MaterialSkin.Controls.MaterialLabel();
+            this.txtEmail = new MaterialSkin.Controls.MaterialTextBox2();
+            this.lblNumber = new MaterialSkin.Controls.MaterialLabel();
+            this.txtNumber = new MaterialSkin.Controls.MaterialTextBox2();
+            this.lblSurname = new MaterialSkin.Controls.MaterialLabel();
+            this.txtSurname = new MaterialSkin.Controls.MaterialTextBox2();
+            this.lblName = new MaterialSkin.Controls.MaterialLabel();
+            this.txtName = new MaterialSkin.Controls.MaterialTextBox2();
+            this.lblDetails = new MaterialSkin.Controls.MaterialLabel();
+            this.lblAllergy = new MaterialSkin.Controls.MaterialLabel();
+            this.btnAddAllergy = new MaterialSkin.Controls.MaterialButton();
+            this.lstAllergies = new MaterialSkin.Controls.MaterialListBox();
+            this.lblAdded = new MaterialSkin.Controls.MaterialLabel();
+            this.btnAddPatient = new MaterialSkin.Controls.MaterialButton();
+            this.errProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnRemoveAllergy = new MaterialSkin.Controls.MaterialButton();
             this.materialTab.SuspendLayout();
             this.tabViewAppointments.SuspendLayout();
             this.cardActions.SuspendLayout();
@@ -73,6 +96,10 @@
             this.cardBooking.SuspendLayout();
             this.cardProcedure.SuspendLayout();
             this.cardPatient.SuspendLayout();
+            this.tabRegiser.SuspendLayout();
+            this.cardAllergies.SuspendLayout();
+            this.cardDetails.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // materialTab
@@ -89,7 +116,7 @@
             this.materialTab.Name = "materialTab";
             this.materialTab.Padding = new System.Drawing.Point(0, 0);
             this.materialTab.SelectedIndex = 0;
-            this.materialTab.Size = new System.Drawing.Size(929, 518);
+            this.materialTab.Size = new System.Drawing.Size(929, 543);
             this.materialTab.TabIndex = 0;
             // 
             // tabViewAppointments
@@ -102,7 +129,7 @@
             this.tabViewAppointments.Location = new System.Drawing.Point(4, 22);
             this.tabViewAppointments.Margin = new System.Windows.Forms.Padding(0);
             this.tabViewAppointments.Name = "tabViewAppointments";
-            this.tabViewAppointments.Size = new System.Drawing.Size(921, 492);
+            this.tabViewAppointments.Size = new System.Drawing.Size(921, 517);
             this.tabViewAppointments.TabIndex = 0;
             this.tabViewAppointments.Text = "View Appointments";
             this.tabViewAppointments.Enter += new System.EventHandler(this.tabViewAppointments_Enter);
@@ -355,23 +382,23 @@
             this.dgvAppointments.AllowUserToDeleteRows = false;
             this.dgvAppointments.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvAppointments.BackgroundColor = System.Drawing.SystemColors.ControlLight;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Roboto", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvAppointments.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Roboto", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvAppointments.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvAppointments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Roboto", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvAppointments.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Roboto", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvAppointments.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvAppointments.Location = new System.Drawing.Point(20, 17);
             this.dgvAppointments.Name = "dgvAppointments";
             this.dgvAppointments.ReadOnly = true;
@@ -392,7 +419,7 @@
             this.tabCreateAppointment.Location = new System.Drawing.Point(4, 22);
             this.tabCreateAppointment.Margin = new System.Windows.Forms.Padding(0);
             this.tabCreateAppointment.Name = "tabCreateAppointment";
-            this.tabCreateAppointment.Size = new System.Drawing.Size(921, 492);
+            this.tabCreateAppointment.Size = new System.Drawing.Size(921, 517);
             this.tabCreateAppointment.TabIndex = 2;
             this.tabCreateAppointment.Text = "Create Appointment";
             this.tabCreateAppointment.Enter += new System.EventHandler(this.tabCreateAppointment_Enter);
@@ -405,7 +432,7 @@
             this.btnCreate.Depth = 0;
             this.btnCreate.HighEmphasis = true;
             this.btnCreate.Icon = null;
-            this.btnCreate.Location = new System.Drawing.Point(147, 428);
+            this.btnCreate.Location = new System.Drawing.Point(147, 432);
             this.btnCreate.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnCreate.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnCreate.Name = "btnCreate";
@@ -429,7 +456,7 @@
             this.cardBooking.Controls.Add(this.calDate);
             this.cardBooking.Depth = 0;
             this.cardBooking.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.cardBooking.Location = new System.Drawing.Point(147, 189);
+            this.cardBooking.Location = new System.Drawing.Point(147, 193);
             this.cardBooking.Margin = new System.Windows.Forms.Padding(14);
             this.cardBooking.MouseState = MaterialSkin.MouseState.HOVER;
             this.cardBooking.Name = "cardBooking";
@@ -521,7 +548,7 @@
             this.lblBooking.AutoSize = true;
             this.lblBooking.Depth = 0;
             this.lblBooking.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblBooking.Location = new System.Drawing.Point(144, 156);
+            this.lblBooking.Location = new System.Drawing.Point(144, 160);
             this.lblBooking.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblBooking.Name = "lblBooking";
             this.lblBooking.Size = new System.Drawing.Size(59, 19);
@@ -534,7 +561,7 @@
             this.cardProcedure.Controls.Add(this.cmbProcedure);
             this.cardProcedure.Depth = 0;
             this.cardProcedure.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.cardProcedure.Location = new System.Drawing.Point(476, 59);
+            this.cardProcedure.Location = new System.Drawing.Point(476, 63);
             this.cardProcedure.Margin = new System.Windows.Forms.Padding(14);
             this.cardProcedure.MouseState = MaterialSkin.MouseState.HOVER;
             this.cardProcedure.Name = "cardProcedure";
@@ -569,7 +596,7 @@
             this.lblProcedure.AutoSize = true;
             this.lblProcedure.Depth = 0;
             this.lblProcedure.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblProcedure.Location = new System.Drawing.Point(473, 26);
+            this.lblProcedure.Location = new System.Drawing.Point(473, 30);
             this.lblProcedure.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblProcedure.Name = "lblProcedure";
             this.lblProcedure.Size = new System.Drawing.Size(72, 19);
@@ -582,7 +609,7 @@
             this.cardPatient.Controls.Add(this.cmbEmail);
             this.cardPatient.Depth = 0;
             this.cardPatient.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.cardPatient.Location = new System.Drawing.Point(147, 59);
+            this.cardPatient.Location = new System.Drawing.Point(147, 63);
             this.cardPatient.Margin = new System.Windows.Forms.Padding(14);
             this.cardPatient.MouseState = MaterialSkin.MouseState.HOVER;
             this.cardPatient.Name = "cardPatient";
@@ -617,7 +644,7 @@
             this.lblPatient.AutoSize = true;
             this.lblPatient.Depth = 0;
             this.lblPatient.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblPatient.Location = new System.Drawing.Point(144, 26);
+            this.lblPatient.Location = new System.Drawing.Point(144, 30);
             this.lblPatient.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblPatient.Name = "lblPatient";
             this.lblPatient.Size = new System.Drawing.Size(51, 19);
@@ -627,18 +654,429 @@
             // tabRegiser
             // 
             this.tabRegiser.BackColor = System.Drawing.SystemColors.Control;
+            this.tabRegiser.Controls.Add(this.btnAddPatient);
+            this.tabRegiser.Controls.Add(this.cardAllergies);
+            this.tabRegiser.Controls.Add(this.lblAllergies);
+            this.tabRegiser.Controls.Add(this.cardDetails);
+            this.tabRegiser.Controls.Add(this.lblDetails);
             this.tabRegiser.Location = new System.Drawing.Point(4, 22);
             this.tabRegiser.Margin = new System.Windows.Forms.Padding(0);
             this.tabRegiser.Name = "tabRegiser";
-            this.tabRegiser.Size = new System.Drawing.Size(921, 492);
+            this.tabRegiser.Size = new System.Drawing.Size(921, 517);
             this.tabRegiser.TabIndex = 1;
             this.tabRegiser.Text = "Register Patient";
+            // 
+            // cardAllergies
+            // 
+            this.cardAllergies.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cardAllergies.Controls.Add(this.btnRemoveAllergy);
+            this.cardAllergies.Controls.Add(this.lblAdded);
+            this.cardAllergies.Controls.Add(this.lstAllergies);
+            this.cardAllergies.Controls.Add(this.btnAddAllergy);
+            this.cardAllergies.Controls.Add(this.lblAllergy);
+            this.cardAllergies.Controls.Add(this.txtAllergy);
+            this.cardAllergies.Depth = 0;
+            this.cardAllergies.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.cardAllergies.Location = new System.Drawing.Point(472, 48);
+            this.cardAllergies.Margin = new System.Windows.Forms.Padding(14);
+            this.cardAllergies.MouseState = MaterialSkin.MouseState.HOVER;
+            this.cardAllergies.Name = "cardAllergies";
+            this.cardAllergies.Padding = new System.Windows.Forms.Padding(14);
+            this.cardAllergies.Size = new System.Drawing.Size(368, 393);
+            this.cardAllergies.TabIndex = 3;
+            // 
+            // txtAllergy
+            // 
+            this.txtAllergy.AnimateReadOnly = false;
+            this.txtAllergy.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtAllergy.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtAllergy.Depth = 0;
+            this.txtAllergy.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtAllergy.HideSelection = true;
+            this.txtAllergy.Hint = "Enter an allergy";
+            this.txtAllergy.LeadingIcon = null;
+            this.txtAllergy.Location = new System.Drawing.Point(17, 36);
+            this.txtAllergy.MaxLength = 32767;
+            this.txtAllergy.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtAllergy.Name = "txtAllergy";
+            this.txtAllergy.PasswordChar = '\0';
+            this.txtAllergy.PrefixSuffixText = null;
+            this.txtAllergy.ReadOnly = false;
+            this.txtAllergy.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtAllergy.SelectedText = "";
+            this.txtAllergy.SelectionLength = 0;
+            this.txtAllergy.SelectionStart = 0;
+            this.txtAllergy.ShortcutsEnabled = true;
+            this.txtAllergy.Size = new System.Drawing.Size(334, 48);
+            this.txtAllergy.TabIndex = 0;
+            this.txtAllergy.TabStop = false;
+            this.txtAllergy.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtAllergy.TrailingIcon = null;
+            this.txtAllergy.UseSystemPasswordChar = false;
+            // 
+            // lblAllergies
+            // 
+            this.lblAllergies.AutoSize = true;
+            this.lblAllergies.Depth = 0;
+            this.lblAllergies.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblAllergies.Location = new System.Drawing.Point(469, 15);
+            this.lblAllergies.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblAllergies.Name = "lblAllergies";
+            this.lblAllergies.Size = new System.Drawing.Size(61, 19);
+            this.lblAllergies.TabIndex = 2;
+            this.lblAllergies.Text = "Allergies";
+            // 
+            // cardDetails
+            // 
+            this.cardDetails.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cardDetails.Controls.Add(this.lblEmergency);
+            this.cardDetails.Controls.Add(this.txtEmergency);
+            this.cardDetails.Controls.Add(this.lblEmail);
+            this.cardDetails.Controls.Add(this.txtEmail);
+            this.cardDetails.Controls.Add(this.lblNumber);
+            this.cardDetails.Controls.Add(this.txtNumber);
+            this.cardDetails.Controls.Add(this.lblSurname);
+            this.cardDetails.Controls.Add(this.txtSurname);
+            this.cardDetails.Controls.Add(this.lblName);
+            this.cardDetails.Controls.Add(this.txtName);
+            this.cardDetails.Depth = 0;
+            this.cardDetails.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.cardDetails.Location = new System.Drawing.Point(76, 48);
+            this.cardDetails.Margin = new System.Windows.Forms.Padding(14);
+            this.cardDetails.MouseState = MaterialSkin.MouseState.HOVER;
+            this.cardDetails.Name = "cardDetails";
+            this.cardDetails.Padding = new System.Windows.Forms.Padding(14);
+            this.cardDetails.Size = new System.Drawing.Size(368, 393);
+            this.cardDetails.TabIndex = 1;
+            // 
+            // lblEmergency
+            // 
+            this.lblEmergency.AutoSize = true;
+            this.lblEmergency.Depth = 0;
+            this.lblEmergency.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblEmergency.Location = new System.Drawing.Point(17, 306);
+            this.lblEmergency.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblEmergency.Name = "lblEmergency";
+            this.lblEmergency.Size = new System.Drawing.Size(138, 19);
+            this.lblEmergency.TabIndex = 9;
+            this.lblEmergency.Text = "Emergency Contact";
+            // 
+            // txtEmergency
+            // 
+            this.txtEmergency.AnimateReadOnly = false;
+            this.txtEmergency.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtEmergency.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtEmergency.Depth = 0;
+            this.txtEmergency.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtEmergency.HideSelection = true;
+            this.txtEmergency.Hint = "Enter patient\'s emergency contact";
+            this.txtEmergency.LeadingIcon = null;
+            this.txtEmergency.Location = new System.Drawing.Point(17, 328);
+            this.txtEmergency.MaxLength = 32767;
+            this.txtEmergency.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtEmergency.Name = "txtEmergency";
+            this.txtEmergency.PasswordChar = '\0';
+            this.txtEmergency.PrefixSuffixText = null;
+            this.txtEmergency.ReadOnly = false;
+            this.txtEmergency.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtEmergency.SelectedText = "";
+            this.txtEmergency.SelectionLength = 0;
+            this.txtEmergency.SelectionStart = 0;
+            this.txtEmergency.ShortcutsEnabled = true;
+            this.txtEmergency.Size = new System.Drawing.Size(334, 48);
+            this.txtEmergency.TabIndex = 8;
+            this.txtEmergency.TabStop = false;
+            this.txtEmergency.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtEmergency.TrailingIcon = null;
+            this.txtEmergency.UseSystemPasswordChar = false;
+            // 
+            // lblEmail
+            // 
+            this.lblEmail.AutoSize = true;
+            this.lblEmail.Depth = 0;
+            this.lblEmail.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblEmail.Location = new System.Drawing.Point(17, 233);
+            this.lblEmail.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblEmail.Name = "lblEmail";
+            this.lblEmail.Size = new System.Drawing.Size(41, 19);
+            this.lblEmail.TabIndex = 7;
+            this.lblEmail.Text = "Email";
+            // 
+            // txtEmail
+            // 
+            this.txtEmail.AnimateReadOnly = false;
+            this.txtEmail.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtEmail.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtEmail.Depth = 0;
+            this.txtEmail.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtEmail.HideSelection = true;
+            this.txtEmail.Hint = "Enter patient\'s email";
+            this.txtEmail.LeadingIcon = null;
+            this.txtEmail.Location = new System.Drawing.Point(17, 255);
+            this.txtEmail.MaxLength = 32767;
+            this.txtEmail.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtEmail.Name = "txtEmail";
+            this.txtEmail.PasswordChar = '\0';
+            this.txtEmail.PrefixSuffixText = null;
+            this.txtEmail.ReadOnly = false;
+            this.txtEmail.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtEmail.SelectedText = "";
+            this.txtEmail.SelectionLength = 0;
+            this.txtEmail.SelectionStart = 0;
+            this.txtEmail.ShortcutsEnabled = true;
+            this.txtEmail.Size = new System.Drawing.Size(334, 48);
+            this.txtEmail.TabIndex = 6;
+            this.txtEmail.TabStop = false;
+            this.txtEmail.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtEmail.TrailingIcon = null;
+            this.txtEmail.UseSystemPasswordChar = false;
+            // 
+            // lblNumber
+            // 
+            this.lblNumber.AutoSize = true;
+            this.lblNumber.Depth = 0;
+            this.lblNumber.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblNumber.Location = new System.Drawing.Point(17, 160);
+            this.lblNumber.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblNumber.Name = "lblNumber";
+            this.lblNumber.Size = new System.Drawing.Size(57, 19);
+            this.lblNumber.TabIndex = 5;
+            this.lblNumber.Text = "Number";
+            // 
+            // txtNumber
+            // 
+            this.txtNumber.AnimateReadOnly = false;
+            this.txtNumber.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtNumber.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtNumber.Depth = 0;
+            this.txtNumber.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtNumber.HideSelection = true;
+            this.txtNumber.Hint = "Enter patient\'s number";
+            this.txtNumber.LeadingIcon = null;
+            this.txtNumber.Location = new System.Drawing.Point(17, 182);
+            this.txtNumber.MaxLength = 32767;
+            this.txtNumber.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtNumber.Name = "txtNumber";
+            this.txtNumber.PasswordChar = '\0';
+            this.txtNumber.PrefixSuffixText = null;
+            this.txtNumber.ReadOnly = false;
+            this.txtNumber.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtNumber.SelectedText = "";
+            this.txtNumber.SelectionLength = 0;
+            this.txtNumber.SelectionStart = 0;
+            this.txtNumber.ShortcutsEnabled = true;
+            this.txtNumber.Size = new System.Drawing.Size(334, 48);
+            this.txtNumber.TabIndex = 4;
+            this.txtNumber.TabStop = false;
+            this.txtNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtNumber.TrailingIcon = null;
+            this.txtNumber.UseSystemPasswordChar = false;
+            // 
+            // lblSurname
+            // 
+            this.lblSurname.AutoSize = true;
+            this.lblSurname.Depth = 0;
+            this.lblSurname.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblSurname.Location = new System.Drawing.Point(17, 87);
+            this.lblSurname.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblSurname.Name = "lblSurname";
+            this.lblSurname.Size = new System.Drawing.Size(65, 19);
+            this.lblSurname.TabIndex = 3;
+            this.lblSurname.Text = "Surname";
+            // 
+            // txtSurname
+            // 
+            this.txtSurname.AnimateReadOnly = false;
+            this.txtSurname.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtSurname.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtSurname.Depth = 0;
+            this.txtSurname.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtSurname.HideSelection = true;
+            this.txtSurname.Hint = "Enter patient\'s suname";
+            this.txtSurname.LeadingIcon = null;
+            this.txtSurname.Location = new System.Drawing.Point(17, 109);
+            this.txtSurname.MaxLength = 32767;
+            this.txtSurname.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtSurname.Name = "txtSurname";
+            this.txtSurname.PasswordChar = '\0';
+            this.txtSurname.PrefixSuffixText = null;
+            this.txtSurname.ReadOnly = false;
+            this.txtSurname.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtSurname.SelectedText = "";
+            this.txtSurname.SelectionLength = 0;
+            this.txtSurname.SelectionStart = 0;
+            this.txtSurname.ShortcutsEnabled = true;
+            this.txtSurname.Size = new System.Drawing.Size(334, 48);
+            this.txtSurname.TabIndex = 2;
+            this.txtSurname.TabStop = false;
+            this.txtSurname.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtSurname.TrailingIcon = null;
+            this.txtSurname.UseSystemPasswordChar = false;
+            // 
+            // lblName
+            // 
+            this.lblName.AutoSize = true;
+            this.lblName.Depth = 0;
+            this.lblName.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblName.Location = new System.Drawing.Point(17, 14);
+            this.lblName.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(43, 19);
+            this.lblName.TabIndex = 1;
+            this.lblName.Text = "Name";
+            // 
+            // txtName
+            // 
+            this.txtName.AnimateReadOnly = false;
+            this.txtName.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtName.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtName.Depth = 0;
+            this.txtName.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtName.HideSelection = true;
+            this.txtName.Hint = "Enter patient\'s name";
+            this.txtName.LeadingIcon = null;
+            this.txtName.Location = new System.Drawing.Point(17, 36);
+            this.txtName.MaxLength = 32767;
+            this.txtName.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtName.Name = "txtName";
+            this.txtName.PasswordChar = '\0';
+            this.txtName.PrefixSuffixText = null;
+            this.txtName.ReadOnly = false;
+            this.txtName.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtName.SelectedText = "";
+            this.txtName.SelectionLength = 0;
+            this.txtName.SelectionStart = 0;
+            this.txtName.ShortcutsEnabled = true;
+            this.txtName.Size = new System.Drawing.Size(334, 48);
+            this.txtName.TabIndex = 0;
+            this.txtName.TabStop = false;
+            this.txtName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtName.TrailingIcon = null;
+            this.txtName.UseSystemPasswordChar = false;
+            // 
+            // lblDetails
+            // 
+            this.lblDetails.AutoSize = true;
+            this.lblDetails.Depth = 0;
+            this.lblDetails.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblDetails.Location = new System.Drawing.Point(73, 15);
+            this.lblDetails.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblDetails.Name = "lblDetails";
+            this.lblDetails.Size = new System.Drawing.Size(50, 19);
+            this.lblDetails.TabIndex = 0;
+            this.lblDetails.Text = "Details";
+            // 
+            // lblAllergy
+            // 
+            this.lblAllergy.AutoSize = true;
+            this.lblAllergy.Depth = 0;
+            this.lblAllergy.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblAllergy.Location = new System.Drawing.Point(18, 11);
+            this.lblAllergy.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblAllergy.Name = "lblAllergy";
+            this.lblAllergy.Size = new System.Drawing.Size(49, 19);
+            this.lblAllergy.TabIndex = 1;
+            this.lblAllergy.Text = "Allergy";
+            // 
+            // btnAddAllergy
+            // 
+            this.btnAddAllergy.AutoSize = false;
+            this.btnAddAllergy.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnAddAllergy.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnAddAllergy.Depth = 0;
+            this.btnAddAllergy.HighEmphasis = true;
+            this.btnAddAllergy.Icon = null;
+            this.btnAddAllergy.Location = new System.Drawing.Point(17, 93);
+            this.btnAddAllergy.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnAddAllergy.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnAddAllergy.Name = "btnAddAllergy";
+            this.btnAddAllergy.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnAddAllergy.Size = new System.Drawing.Size(334, 36);
+            this.btnAddAllergy.TabIndex = 2;
+            this.btnAddAllergy.Text = "Add Allergy";
+            this.btnAddAllergy.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
+            this.btnAddAllergy.UseAccentColor = true;
+            this.btnAddAllergy.UseVisualStyleBackColor = true;
+            this.btnAddAllergy.Click += new System.EventHandler(this.btnAddAllergy_Click);
+            // 
+            // lstAllergies
+            // 
+            this.lstAllergies.BackColor = System.Drawing.Color.White;
+            this.lstAllergies.BorderColor = System.Drawing.Color.LightGray;
+            this.lstAllergies.Depth = 0;
+            this.lstAllergies.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lstAllergies.Location = new System.Drawing.Point(17, 171);
+            this.lstAllergies.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lstAllergies.Name = "lstAllergies";
+            this.lstAllergies.SelectedIndex = -1;
+            this.lstAllergies.SelectedItem = null;
+            this.lstAllergies.Size = new System.Drawing.Size(334, 160);
+            this.lstAllergies.TabIndex = 3;
+            // 
+            // lblAdded
+            // 
+            this.lblAdded.AutoSize = true;
+            this.lblAdded.Depth = 0;
+            this.lblAdded.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblAdded.Location = new System.Drawing.Point(18, 149);
+            this.lblAdded.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblAdded.Name = "lblAdded";
+            this.lblAdded.Size = new System.Drawing.Size(110, 19);
+            this.lblAdded.TabIndex = 4;
+            this.lblAdded.Text = "Added Allergies";
+            // 
+            // btnAddPatient
+            // 
+            this.btnAddPatient.AutoSize = false;
+            this.btnAddPatient.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnAddPatient.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnAddPatient.Depth = 0;
+            this.btnAddPatient.HighEmphasis = true;
+            this.btnAddPatient.Icon = null;
+            this.btnAddPatient.Location = new System.Drawing.Point(76, 461);
+            this.btnAddPatient.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnAddPatient.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnAddPatient.Name = "btnAddPatient";
+            this.btnAddPatient.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnAddPatient.Size = new System.Drawing.Size(764, 36);
+            this.btnAddPatient.TabIndex = 4;
+            this.btnAddPatient.Text = "Add Patient";
+            this.btnAddPatient.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnAddPatient.UseAccentColor = false;
+            this.btnAddPatient.UseVisualStyleBackColor = true;
+            this.btnAddPatient.Click += new System.EventHandler(this.btnAddPatient_Click);
+            // 
+            // errProvider
+            // 
+            this.errProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errProvider.ContainerControl = this;
+            // 
+            // btnRemoveAllergy
+            // 
+            this.btnRemoveAllergy.AutoSize = false;
+            this.btnRemoveAllergy.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnRemoveAllergy.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnRemoveAllergy.Depth = 0;
+            this.btnRemoveAllergy.HighEmphasis = true;
+            this.btnRemoveAllergy.Icon = null;
+            this.btnRemoveAllergy.Location = new System.Drawing.Point(16, 340);
+            this.btnRemoveAllergy.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnRemoveAllergy.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnRemoveAllergy.Name = "btnRemoveAllergy";
+            this.btnRemoveAllergy.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnRemoveAllergy.Size = new System.Drawing.Size(334, 36);
+            this.btnRemoveAllergy.TabIndex = 5;
+            this.btnRemoveAllergy.Text = "Remove Allergy";
+            this.btnRemoveAllergy.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
+            this.btnRemoveAllergy.UseAccentColor = true;
+            this.btnRemoveAllergy.UseVisualStyleBackColor = true;
+            this.btnRemoveAllergy.Click += new System.EventHandler(this.btnRemoveAllergy_Click);
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(929, 582);
+            this.ClientSize = new System.Drawing.Size(929, 607);
             this.Controls.Add(this.materialTab);
             this.DrawerTabControl = this.materialTab;
             this.DrawerWidth = 220;
@@ -660,6 +1098,13 @@
             this.cardBooking.PerformLayout();
             this.cardProcedure.ResumeLayout(false);
             this.cardPatient.ResumeLayout(false);
+            this.tabRegiser.ResumeLayout(false);
+            this.tabRegiser.PerformLayout();
+            this.cardAllergies.ResumeLayout(false);
+            this.cardAllergies.PerformLayout();
+            this.cardDetails.ResumeLayout(false);
+            this.cardDetails.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -700,6 +1145,28 @@
         private MaterialSkin.Controls.MaterialLabel lblSelectedDate;
         private MaterialSkin.Controls.MaterialLabel lblSelectedHeading;
         private MaterialSkin.Controls.MaterialButton btnCreate;
+        private MaterialSkin.Controls.MaterialCard cardDetails;
+        private MaterialSkin.Controls.MaterialLabel lblName;
+        private MaterialSkin.Controls.MaterialTextBox2 txtName;
+        private MaterialSkin.Controls.MaterialLabel lblDetails;
+        private MaterialSkin.Controls.MaterialLabel lblSurname;
+        private MaterialSkin.Controls.MaterialTextBox2 txtSurname;
+        private MaterialSkin.Controls.MaterialLabel lblNumber;
+        private MaterialSkin.Controls.MaterialTextBox2 txtNumber;
+        private MaterialSkin.Controls.MaterialLabel lblEmergency;
+        private MaterialSkin.Controls.MaterialTextBox2 txtEmergency;
+        private MaterialSkin.Controls.MaterialLabel lblEmail;
+        private MaterialSkin.Controls.MaterialTextBox2 txtEmail;
+        private MaterialSkin.Controls.MaterialCard cardAllergies;
+        private MaterialSkin.Controls.MaterialTextBox2 txtAllergy;
+        private MaterialSkin.Controls.MaterialLabel lblAllergies;
+        private MaterialSkin.Controls.MaterialLabel lblAllergy;
+        private MaterialSkin.Controls.MaterialButton btnAddAllergy;
+        private MaterialSkin.Controls.MaterialLabel lblAdded;
+        private MaterialSkin.Controls.MaterialListBox lstAllergies;
+        private MaterialSkin.Controls.MaterialButton btnAddPatient;
+        private System.Windows.Forms.ErrorProvider errProvider;
+        private MaterialSkin.Controls.MaterialButton btnRemoveAllergy;
     }
 }
 
