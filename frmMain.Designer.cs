@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.materialTab = new MaterialSkin.Controls.MaterialTabControl();
             this.tabViewAppointments = new System.Windows.Forms.TabPage();
             this.cardViewBg = new MaterialSkin.Controls.MaterialCard();
@@ -40,17 +40,18 @@
             this.btnCancel = new MaterialSkin.Controls.MaterialButton();
             this.btnComplete = new MaterialSkin.Controls.MaterialButton();
             this.cardGV = new MaterialSkin.Controls.MaterialCard();
+            this.rdoNone = new MaterialSkin.Controls.MaterialRadioButton();
+            this.rdoOpen = new MaterialSkin.Controls.MaterialRadioButton();
+            this.rdoNoShow = new MaterialSkin.Controls.MaterialRadioButton();
+            this.rdoCancelled = new MaterialSkin.Controls.MaterialRadioButton();
+            this.rdoCompleted = new MaterialSkin.Controls.MaterialRadioButton();
+            this.lblFilter = new MaterialSkin.Controls.MaterialLabel();
             this.dgvAppointments = new System.Windows.Forms.DataGridView();
             this.tabCreateAppointment = new System.Windows.Forms.TabPage();
             this.cardCreateBg = new MaterialSkin.Controls.MaterialCard();
             this.tabRegiser = new System.Windows.Forms.TabPage();
             this.cardRegisterBg = new MaterialSkin.Controls.MaterialCard();
-            this.lblFilter = new MaterialSkin.Controls.MaterialLabel();
-            this.rdoCompleted = new MaterialSkin.Controls.MaterialRadioButton();
-            this.rdoCancelled = new MaterialSkin.Controls.MaterialRadioButton();
-            this.rdoNoShow = new MaterialSkin.Controls.MaterialRadioButton();
-            this.rdoOpen = new MaterialSkin.Controls.MaterialRadioButton();
-            this.rdoNone = new MaterialSkin.Controls.MaterialRadioButton();
+            this.btnRemove = new MaterialSkin.Controls.MaterialButton();
             this.materialTab.SuspendLayout();
             this.tabViewAppointments.SuspendLayout();
             this.cardViewBg.SuspendLayout();
@@ -135,6 +136,7 @@
             // cardActions
             // 
             this.cardActions.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cardActions.Controls.Add(this.btnRemove);
             this.cardActions.Controls.Add(this.btnMove);
             this.cardActions.Controls.Add(this.btnCancel);
             this.cardActions.Controls.Add(this.btnComplete);
@@ -156,7 +158,7 @@
             this.btnMove.Depth = 0;
             this.btnMove.HighEmphasis = true;
             this.btnMove.Icon = null;
-            this.btnMove.Location = new System.Drawing.Point(167, 20);
+            this.btnMove.Location = new System.Drawing.Point(69, 20);
             this.btnMove.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnMove.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnMove.Name = "btnMove";
@@ -177,7 +179,7 @@
             this.btnCancel.Depth = 0;
             this.btnCancel.HighEmphasis = true;
             this.btnCancel.Icon = null;
-            this.btnCancel.Location = new System.Drawing.Point(551, 20);
+            this.btnCancel.Location = new System.Drawing.Point(455, 20);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnCancel.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnCancel.Name = "btnCancel";
@@ -198,7 +200,7 @@
             this.btnComplete.Depth = 0;
             this.btnComplete.HighEmphasis = true;
             this.btnComplete.Icon = null;
-            this.btnComplete.Location = new System.Drawing.Point(359, 20);
+            this.btnComplete.Location = new System.Drawing.Point(262, 20);
             this.btnComplete.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnComplete.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnComplete.Name = "btnComplete";
@@ -231,29 +233,126 @@
             this.cardGV.Size = new System.Drawing.Size(881, 294);
             this.cardGV.TabIndex = 1;
             // 
+            // rdoNone
+            // 
+            this.rdoNone.AutoSize = true;
+            this.rdoNone.Depth = 0;
+            this.rdoNone.Location = new System.Drawing.Point(737, 49);
+            this.rdoNone.Margin = new System.Windows.Forms.Padding(0);
+            this.rdoNone.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdoNone.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdoNone.Name = "rdoNone";
+            this.rdoNone.Ripple = true;
+            this.rdoNone.Size = new System.Drawing.Size(72, 37);
+            this.rdoNone.TabIndex = 6;
+            this.rdoNone.TabStop = true;
+            this.rdoNone.Text = "None";
+            this.rdoNone.UseVisualStyleBackColor = true;
+            this.rdoNone.CheckedChanged += new System.EventHandler(this.rdoNone_CheckedChanged);
+            // 
+            // rdoOpen
+            // 
+            this.rdoOpen.AutoSize = true;
+            this.rdoOpen.Depth = 0;
+            this.rdoOpen.Location = new System.Drawing.Point(737, 86);
+            this.rdoOpen.Margin = new System.Windows.Forms.Padding(0);
+            this.rdoOpen.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdoOpen.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdoOpen.Name = "rdoOpen";
+            this.rdoOpen.Ripple = true;
+            this.rdoOpen.Size = new System.Drawing.Size(72, 37);
+            this.rdoOpen.TabIndex = 5;
+            this.rdoOpen.TabStop = true;
+            this.rdoOpen.Text = "Open";
+            this.rdoOpen.UseVisualStyleBackColor = true;
+            this.rdoOpen.CheckedChanged += new System.EventHandler(this.rdoOpen_CheckedChanged);
+            // 
+            // rdoNoShow
+            // 
+            this.rdoNoShow.AutoSize = true;
+            this.rdoNoShow.Depth = 0;
+            this.rdoNoShow.Location = new System.Drawing.Point(737, 197);
+            this.rdoNoShow.Margin = new System.Windows.Forms.Padding(0);
+            this.rdoNoShow.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdoNoShow.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdoNoShow.Name = "rdoNoShow";
+            this.rdoNoShow.Ripple = true;
+            this.rdoNoShow.Size = new System.Drawing.Size(99, 37);
+            this.rdoNoShow.TabIndex = 4;
+            this.rdoNoShow.TabStop = true;
+            this.rdoNoShow.Text = "No Show";
+            this.rdoNoShow.UseVisualStyleBackColor = true;
+            this.rdoNoShow.CheckedChanged += new System.EventHandler(this.rdoNoShow_CheckedChanged);
+            // 
+            // rdoCancelled
+            // 
+            this.rdoCancelled.AutoSize = true;
+            this.rdoCancelled.Depth = 0;
+            this.rdoCancelled.Location = new System.Drawing.Point(737, 160);
+            this.rdoCancelled.Margin = new System.Windows.Forms.Padding(0);
+            this.rdoCancelled.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdoCancelled.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdoCancelled.Name = "rdoCancelled";
+            this.rdoCancelled.Ripple = true;
+            this.rdoCancelled.Size = new System.Drawing.Size(104, 37);
+            this.rdoCancelled.TabIndex = 3;
+            this.rdoCancelled.TabStop = true;
+            this.rdoCancelled.Text = "Cancelled";
+            this.rdoCancelled.UseVisualStyleBackColor = true;
+            this.rdoCancelled.CheckedChanged += new System.EventHandler(this.rdoCancelled_CheckedChanged);
+            // 
+            // rdoCompleted
+            // 
+            this.rdoCompleted.AutoSize = true;
+            this.rdoCompleted.Depth = 0;
+            this.rdoCompleted.Location = new System.Drawing.Point(737, 123);
+            this.rdoCompleted.Margin = new System.Windows.Forms.Padding(0);
+            this.rdoCompleted.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdoCompleted.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdoCompleted.Name = "rdoCompleted";
+            this.rdoCompleted.Ripple = true;
+            this.rdoCompleted.Size = new System.Drawing.Size(111, 37);
+            this.rdoCompleted.TabIndex = 2;
+            this.rdoCompleted.TabStop = true;
+            this.rdoCompleted.Text = "Completed";
+            this.rdoCompleted.UseVisualStyleBackColor = true;
+            this.rdoCompleted.CheckedChanged += new System.EventHandler(this.rdoCompleted_CheckedChanged);
+            // 
+            // lblFilter
+            // 
+            this.lblFilter.AutoSize = true;
+            this.lblFilter.Depth = 0;
+            this.lblFilter.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblFilter.Location = new System.Drawing.Point(734, 17);
+            this.lblFilter.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblFilter.Name = "lblFilter";
+            this.lblFilter.Size = new System.Drawing.Size(36, 19);
+            this.lblFilter.TabIndex = 1;
+            this.lblFilter.Text = "Filter";
+            // 
             // dgvAppointments
             // 
             this.dgvAppointments.AllowUserToAddRows = false;
             this.dgvAppointments.AllowUserToDeleteRows = false;
             this.dgvAppointments.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvAppointments.BackgroundColor = System.Drawing.SystemColors.ControlLight;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Roboto", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvAppointments.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Roboto", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvAppointments.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvAppointments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Roboto", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvAppointments.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Roboto", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvAppointments.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvAppointments.Location = new System.Drawing.Point(20, 17);
             this.dgvAppointments.Name = "dgvAppointments";
             this.dgvAppointments.ReadOnly = true;
@@ -311,102 +410,26 @@
             this.cardRegisterBg.Size = new System.Drawing.Size(921, 486);
             this.cardRegisterBg.TabIndex = 1;
             // 
-            // lblFilter
+            // btnRemove
             // 
-            this.lblFilter.AutoSize = true;
-            this.lblFilter.Depth = 0;
-            this.lblFilter.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblFilter.Location = new System.Drawing.Point(734, 17);
-            this.lblFilter.MouseState = MaterialSkin.MouseState.HOVER;
-            this.lblFilter.Name = "lblFilter";
-            this.lblFilter.Size = new System.Drawing.Size(36, 19);
-            this.lblFilter.TabIndex = 1;
-            this.lblFilter.Text = "Filter";
-            // 
-            // rdoCompleted
-            // 
-            this.rdoCompleted.AutoSize = true;
-            this.rdoCompleted.Depth = 0;
-            this.rdoCompleted.Location = new System.Drawing.Point(737, 123);
-            this.rdoCompleted.Margin = new System.Windows.Forms.Padding(0);
-            this.rdoCompleted.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.rdoCompleted.MouseState = MaterialSkin.MouseState.HOVER;
-            this.rdoCompleted.Name = "rdoCompleted";
-            this.rdoCompleted.Ripple = true;
-            this.rdoCompleted.Size = new System.Drawing.Size(111, 37);
-            this.rdoCompleted.TabIndex = 2;
-            this.rdoCompleted.TabStop = true;
-            this.rdoCompleted.Text = "Completed";
-            this.rdoCompleted.UseVisualStyleBackColor = true;
-            this.rdoCompleted.CheckedChanged += new System.EventHandler(this.rdoCompleted_CheckedChanged);
-            // 
-            // rdoCancelled
-            // 
-            this.rdoCancelled.AutoSize = true;
-            this.rdoCancelled.Depth = 0;
-            this.rdoCancelled.Location = new System.Drawing.Point(737, 160);
-            this.rdoCancelled.Margin = new System.Windows.Forms.Padding(0);
-            this.rdoCancelled.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.rdoCancelled.MouseState = MaterialSkin.MouseState.HOVER;
-            this.rdoCancelled.Name = "rdoCancelled";
-            this.rdoCancelled.Ripple = true;
-            this.rdoCancelled.Size = new System.Drawing.Size(104, 37);
-            this.rdoCancelled.TabIndex = 3;
-            this.rdoCancelled.TabStop = true;
-            this.rdoCancelled.Text = "Cancelled";
-            this.rdoCancelled.UseVisualStyleBackColor = true;
-            this.rdoCancelled.CheckedChanged += new System.EventHandler(this.rdoCancelled_CheckedChanged);
-            // 
-            // rdoNoShow
-            // 
-            this.rdoNoShow.AutoSize = true;
-            this.rdoNoShow.Depth = 0;
-            this.rdoNoShow.Location = new System.Drawing.Point(737, 197);
-            this.rdoNoShow.Margin = new System.Windows.Forms.Padding(0);
-            this.rdoNoShow.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.rdoNoShow.MouseState = MaterialSkin.MouseState.HOVER;
-            this.rdoNoShow.Name = "rdoNoShow";
-            this.rdoNoShow.Ripple = true;
-            this.rdoNoShow.Size = new System.Drawing.Size(99, 37);
-            this.rdoNoShow.TabIndex = 4;
-            this.rdoNoShow.TabStop = true;
-            this.rdoNoShow.Text = "No Show";
-            this.rdoNoShow.UseVisualStyleBackColor = true;
-            this.rdoNoShow.CheckedChanged += new System.EventHandler(this.rdoNoShow_CheckedChanged);
-            // 
-            // rdoOpen
-            // 
-            this.rdoOpen.AutoSize = true;
-            this.rdoOpen.Depth = 0;
-            this.rdoOpen.Location = new System.Drawing.Point(737, 86);
-            this.rdoOpen.Margin = new System.Windows.Forms.Padding(0);
-            this.rdoOpen.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.rdoOpen.MouseState = MaterialSkin.MouseState.HOVER;
-            this.rdoOpen.Name = "rdoOpen";
-            this.rdoOpen.Ripple = true;
-            this.rdoOpen.Size = new System.Drawing.Size(72, 37);
-            this.rdoOpen.TabIndex = 5;
-            this.rdoOpen.TabStop = true;
-            this.rdoOpen.Text = "Open";
-            this.rdoOpen.UseVisualStyleBackColor = true;
-            this.rdoOpen.CheckedChanged += new System.EventHandler(this.rdoOpen_CheckedChanged);
-            // 
-            // rdoNone
-            // 
-            this.rdoNone.AutoSize = true;
-            this.rdoNone.Depth = 0;
-            this.rdoNone.Location = new System.Drawing.Point(737, 49);
-            this.rdoNone.Margin = new System.Windows.Forms.Padding(0);
-            this.rdoNone.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.rdoNone.MouseState = MaterialSkin.MouseState.HOVER;
-            this.rdoNone.Name = "rdoNone";
-            this.rdoNone.Ripple = true;
-            this.rdoNone.Size = new System.Drawing.Size(72, 37);
-            this.rdoNone.TabIndex = 6;
-            this.rdoNone.TabStop = true;
-            this.rdoNone.Text = "None";
-            this.rdoNone.UseVisualStyleBackColor = true;
-            this.rdoNone.CheckedChanged += new System.EventHandler(this.rdoNone_CheckedChanged);
+            this.btnRemove.AutoSize = false;
+            this.btnRemove.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnRemove.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnRemove.Depth = 0;
+            this.btnRemove.HighEmphasis = true;
+            this.btnRemove.Icon = null;
+            this.btnRemove.Location = new System.Drawing.Point(648, 20);
+            this.btnRemove.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnRemove.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnRemove.Name = "btnRemove";
+            this.btnRemove.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnRemove.Size = new System.Drawing.Size(170, 36);
+            this.btnRemove.TabIndex = 3;
+            this.btnRemove.Text = "Remove";
+            this.btnRemove.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnRemove.UseAccentColor = false;
+            this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
             // frmMain
             // 
@@ -458,6 +481,7 @@
         private MaterialSkin.Controls.MaterialLabel lblFilter;
         private MaterialSkin.Controls.MaterialRadioButton rdoNone;
         private MaterialSkin.Controls.MaterialRadioButton rdoOpen;
+        private MaterialSkin.Controls.MaterialButton btnRemove;
     }
 }
 

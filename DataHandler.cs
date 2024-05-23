@@ -118,6 +118,28 @@ namespace Desktop_44905165
 
                 conn.Close();
             }
+            catch (SqlException ex)
+            {
+                // error message
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
+
+        }
+        public void ExecuteDelete(SqlCommand cmd)
+        {
+            try
+            {
+                // uses sql delete statement to update database
+                conn.Open();
+
+                adapter.DeleteCommand = cmd;
+                adapter.DeleteCommand.ExecuteNonQuery();
+
+                cmd.Dispose();
+
+                conn.Close();
+            }
             catch(SqlException ex)
             {
                 // error message

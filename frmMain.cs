@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Desktop_44905165
 {
@@ -89,7 +90,7 @@ namespace Desktop_44905165
 
             if (status != "Open")
             {
-                MessageBox.Show($"Only open appointments may be {action}", "Check Appointment Status", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Only open appointments may be {action}", "Check Appointment Status", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return false;
             }
 
@@ -188,6 +189,25 @@ namespace Desktop_44905165
             DisplayAppointments(currentFilter);
         }
 
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+            if(MessageBox.Show("Are you sure? This action can't be undone.", "Confirm", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+            {
+                int id = int.Parse(GetAppointmentValue("ap_id"));
+
+                // delete appointment
+                string sql = @"delete appointment where id = @id";
+                SqlCommand cmd = new SqlCommand(sql, handler.conn);
+
+                cmd.Parameters.AddWithValue("@id", id);
+
+                handler.ExecuteDelete(cmd);
+
+                // refresh datagridview with active filter
+                DisplayAppointments(currentFilter);
+            }
+        }
+
         #region Filter appointments radio buttons
 
         private void FilterAppointments()
@@ -247,6 +267,6 @@ namespace Desktop_44905165
             FilterAppointments();
         }
 
-        #endregion
+        #endregion        
     }
 }
