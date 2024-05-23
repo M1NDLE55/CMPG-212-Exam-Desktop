@@ -16,8 +16,14 @@ namespace Desktop_44905165
 {
     public partial class frmMain : MaterialForm
     {
-        DataHandler handler;
+        // each tab has its own datahandler since they function as separate forms with unique datasets
+        DataHandler handlerView, handlerCreate, handlerPatient;
+
+        // view appointments tab
         private string currentFilter = "";
+
+        // create appointment tab
+        private DateTime selectedDate;
         
         public frmMain()
         {
@@ -32,9 +38,13 @@ namespace Desktop_44905165
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            // create a database handler
-            handler = new DataHandler();            
+            // create database handlers
+            handlerView = new DataHandler();            
+            handlerCreate = new DataHandler();            
+            handlerPatient = new DataHandler();            
         }
+
+        // ------ VIEW APPOINTMENTS TAB ------
 
         private void DisplayAppointments(string status = "") // use default param value instead of overloading function
         {
@@ -47,7 +57,7 @@ namespace Desktop_44905165
                     // filter appointments by status
                     (status != "" ? "where status = @status" : "");
 
-            SqlCommand cmd = new SqlCommand(sql, handler.conn);
+            SqlCommand cmd = new SqlCommand(sql, handlerView.conn);
 
             if (status != "")
             {
@@ -56,7 +66,7 @@ namespace Desktop_44905165
             }
 
             // populate datagridview
-            handler.FillDataGridView(cmd, ref dgvAppointments);
+            handlerView.FillDataGridView(cmd, ref dgvAppointments);
 
             // no columns exist if no appointments exist
             if (dgvAppointments.Rows.Count != 0)
@@ -79,7 +89,8 @@ namespace Desktop_44905165
 
         private void tabViewAppointments_Enter(object sender, EventArgs e)
         {
-            // set default filter that also fires radio button event and loads datagridview
+            DisplayAppointments();
+            currentFilter = "";
             rdoNone.Checked = true;
         }
 
@@ -118,12 +129,15 @@ namespace Desktop_44905165
 
             // update appointment date
             string sql = @"update appointment set booking_time = @newDate where id = @id";
-            SqlCommand cmd = new SqlCommand(sql,handler.conn);
+            SqlCommand cmd = new SqlCommand(sql,handlerView.conn);
 
             cmd.Parameters.AddWithValue("@newDate", newDate);
             cmd.Parameters.AddWithValue("@id", id);
 
-            handler.ExecuteUpdate(cmd);
+            if (handlerView.ExecuteUpdate(cmd))
+            {
+                MessageBox.Show("Appointment updated", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
 
             // refresh datagridview with active filter
             DisplayAppointments(currentFilter);
@@ -135,12 +149,15 @@ namespace Desktop_44905165
 
             // update appointment status
             string sql = @"update appointment set status = @status where id = @id";
-            SqlCommand cmd = new SqlCommand(sql, handler.conn);
+            SqlCommand cmd = new SqlCommand(sql, handlerView.conn);
 
             cmd.Parameters.AddWithValue("@status", status);
             cmd.Parameters.AddWithValue("@id", id);
 
-            handler.ExecuteUpdate(cmd);
+            if (handlerView.ExecuteUpdate(cmd))
+            {
+                MessageBox.Show("Appointment updated", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }       
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -197,11 +214,14 @@ namespace Desktop_44905165
 
                 // delete appointment
                 string sql = @"delete appointment where id = @id";
-                SqlCommand cmd = new SqlCommand(sql, handler.conn);
+                SqlCommand cmd = new SqlCommand(sql, handlerView.conn);
 
                 cmd.Parameters.AddWithValue("@id", id);
 
-                handler.ExecuteDelete(cmd);
+                if(handlerView.ExecuteDelete(cmd))
+                {
+                    MessageBox.Show("Appointment removed", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
 
                 // refresh datagridview with active filter
                 DisplayAppointments(currentFilter);
@@ -265,8 +285,85 @@ namespace Desktop_44905165
         private void rdoNoShow_CheckedChanged(object sender, EventArgs e)
         {
             FilterAppointments();
-        }
+        }     
 
         #endregion
+
+        // ------ CREATE APPOINTMENT TAB ------
+
+        private void tabCreateAppointment_Enter(object sender, EventArgs e)
+        {
+            // get patient emails since they're unique - names and surnames may have duplicates
+            SqlCommand cmdEmails = new SqlCommand(@"select email from patient order by email asc", handlerCreate.conn);
+            DataSet dsEmails = handlerCreate.GetDataSet(cmdEmails);
+            handlerCreate.FillComboBox(dsEmails ,ref cmbEmail, "email");
+
+            // get procedures offered
+            SqlCommand cmdProcedures = new SqlCommand(@"select name from [procedure] order by name asc", handlerCreate.conn);
+            DataSet dsProcedures = handlerCreate.GetDataSet(cmdProcedures);
+            handlerCreate.FillComboBox(dsProcedures, ref cmbProcedure, "name");
+
+            // config calendar control
+            calDate.MaxSelectionCount = 1;
+            calDate.MinDate = DateTime.Now;
+            calDate.MaxDate = DateTime.Now.AddYears(1);
+
+            //load time slots into combobox
+            DateTime timeSlots = new DateTime(2000, 1, 1, 8, 0, 0);
+            do
+            {
+                cmbTime.Items.Add(timeSlots.ToShortTimeString());
+                timeSlots = timeSlots.AddMinutes(30);
+            }
+            while (!timeSlots.Equals(new DateTime(2000, 1, 1, 16, 30, 0)));
+
+            // config combobox
+            cmbTime.SelectedIndex = 0;
+
+            UpdateDate();
+        }
+
+        private void cmbTime_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateDate();
+        }
+
+        private void btnCreate_Click(object sender, EventArgs e)
+        {
+            string email = cmbEmail.Text;
+            string procedure = cmbProcedure.Text;
+
+            // insert a record into appointment using ids from other tables
+            string sql =
+                @"insert into appointment (patient_id, procedure_id, booking_time, status) " +
+                "values (" +
+                "(select id from patient where email = @email)," +
+                "(select id from [procedure] where name = @name)," +
+                "@booking_time," +
+                "'Open') ";
+
+            SqlCommand cmd = new SqlCommand(sql,handlerCreate.conn);
+
+            cmd.Parameters.AddWithValue("@email",email);
+            cmd.Parameters.AddWithValue("@name",procedure);
+            cmd.Parameters.AddWithValue("@booking_time",selectedDate);
+
+            if (handlerCreate.ExecuteInsert(cmd))
+            {
+                MessageBox.Show("Appointment created", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void UpdateDate()
+        {
+            // update selected date 
+            selectedDate = DateTime.Parse($"{calDate.SelectionEnd.ToShortDateString()} {cmbTime.Text}:00");
+            lblSelectedDate.Text = selectedDate.ToString();
+        }
+
+        private void calDate_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            UpdateDate();
+        }
     }
 }

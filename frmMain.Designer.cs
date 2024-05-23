@@ -48,12 +48,31 @@
             this.lblFilter = new MaterialSkin.Controls.MaterialLabel();
             this.dgvAppointments = new System.Windows.Forms.DataGridView();
             this.tabCreateAppointment = new System.Windows.Forms.TabPage();
+            this.btnCreate = new MaterialSkin.Controls.MaterialButton();
+            this.cardBooking = new MaterialSkin.Controls.MaterialCard();
+            this.lblSelectedDate = new MaterialSkin.Controls.MaterialLabel();
+            this.lblSelectedHeading = new MaterialSkin.Controls.MaterialLabel();
+            this.lblDate = new MaterialSkin.Controls.MaterialLabel();
+            this.lblTime = new MaterialSkin.Controls.MaterialLabel();
+            this.cmbTime = new MaterialSkin.Controls.MaterialComboBox();
+            this.calDate = new System.Windows.Forms.MonthCalendar();
+            this.lblBooking = new MaterialSkin.Controls.MaterialLabel();
+            this.cardProcedure = new MaterialSkin.Controls.MaterialCard();
+            this.cmbProcedure = new MaterialSkin.Controls.MaterialComboBox();
+            this.lblProcedure = new MaterialSkin.Controls.MaterialLabel();
+            this.cardPatient = new MaterialSkin.Controls.MaterialCard();
+            this.cmbEmail = new MaterialSkin.Controls.MaterialComboBox();
+            this.lblPatient = new MaterialSkin.Controls.MaterialLabel();
             this.tabRegiser = new System.Windows.Forms.TabPage();
             this.materialTab.SuspendLayout();
             this.tabViewAppointments.SuspendLayout();
             this.cardActions.SuspendLayout();
             this.cardGV.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAppointments)).BeginInit();
+            this.tabCreateAppointment.SuspendLayout();
+            this.cardBooking.SuspendLayout();
+            this.cardProcedure.SuspendLayout();
+            this.cardPatient.SuspendLayout();
             this.SuspendLayout();
             // 
             // materialTab
@@ -363,12 +382,247 @@
             // tabCreateAppointment
             // 
             this.tabCreateAppointment.BackColor = System.Drawing.SystemColors.Control;
+            this.tabCreateAppointment.Controls.Add(this.btnCreate);
+            this.tabCreateAppointment.Controls.Add(this.cardBooking);
+            this.tabCreateAppointment.Controls.Add(this.lblBooking);
+            this.tabCreateAppointment.Controls.Add(this.cardProcedure);
+            this.tabCreateAppointment.Controls.Add(this.lblProcedure);
+            this.tabCreateAppointment.Controls.Add(this.cardPatient);
+            this.tabCreateAppointment.Controls.Add(this.lblPatient);
             this.tabCreateAppointment.Location = new System.Drawing.Point(4, 22);
             this.tabCreateAppointment.Margin = new System.Windows.Forms.Padding(0);
             this.tabCreateAppointment.Name = "tabCreateAppointment";
-            this.tabCreateAppointment.Size = new System.Drawing.Size(921, 486);
+            this.tabCreateAppointment.Size = new System.Drawing.Size(921, 492);
             this.tabCreateAppointment.TabIndex = 2;
             this.tabCreateAppointment.Text = "Create Appointment";
+            this.tabCreateAppointment.Enter += new System.EventHandler(this.tabCreateAppointment_Enter);
+            // 
+            // btnCreate
+            // 
+            this.btnCreate.AutoSize = false;
+            this.btnCreate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnCreate.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnCreate.Depth = 0;
+            this.btnCreate.HighEmphasis = true;
+            this.btnCreate.Icon = null;
+            this.btnCreate.Location = new System.Drawing.Point(147, 428);
+            this.btnCreate.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnCreate.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnCreate.Name = "btnCreate";
+            this.btnCreate.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnCreate.Size = new System.Drawing.Size(630, 36);
+            this.btnCreate.TabIndex = 6;
+            this.btnCreate.Text = "Create Appointment";
+            this.btnCreate.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnCreate.UseAccentColor = false;
+            this.btnCreate.UseVisualStyleBackColor = true;
+            this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
+            // 
+            // cardBooking
+            // 
+            this.cardBooking.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cardBooking.Controls.Add(this.lblSelectedDate);
+            this.cardBooking.Controls.Add(this.lblSelectedHeading);
+            this.cardBooking.Controls.Add(this.lblDate);
+            this.cardBooking.Controls.Add(this.lblTime);
+            this.cardBooking.Controls.Add(this.cmbTime);
+            this.cardBooking.Controls.Add(this.calDate);
+            this.cardBooking.Depth = 0;
+            this.cardBooking.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.cardBooking.Location = new System.Drawing.Point(147, 189);
+            this.cardBooking.Margin = new System.Windows.Forms.Padding(14);
+            this.cardBooking.MouseState = MaterialSkin.MouseState.HOVER;
+            this.cardBooking.Name = "cardBooking";
+            this.cardBooking.Padding = new System.Windows.Forms.Padding(14);
+            this.cardBooking.Size = new System.Drawing.Size(630, 219);
+            this.cardBooking.TabIndex = 5;
+            // 
+            // lblSelectedDate
+            // 
+            this.lblSelectedDate.AutoSize = true;
+            this.lblSelectedDate.Depth = 0;
+            this.lblSelectedDate.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblSelectedDate.Location = new System.Drawing.Point(343, 142);
+            this.lblSelectedDate.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblSelectedDate.Name = "lblSelectedDate";
+            this.lblSelectedDate.Size = new System.Drawing.Size(42, 19);
+            this.lblSelectedDate.TabIndex = 15;
+            this.lblSelectedDate.Text = "[Date]";
+            // 
+            // lblSelectedHeading
+            // 
+            this.lblSelectedHeading.AutoSize = true;
+            this.lblSelectedHeading.Depth = 0;
+            this.lblSelectedHeading.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblSelectedHeading.Location = new System.Drawing.Point(343, 112);
+            this.lblSelectedHeading.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblSelectedHeading.Name = "lblSelectedHeading";
+            this.lblSelectedHeading.Size = new System.Drawing.Size(98, 19);
+            this.lblSelectedHeading.TabIndex = 14;
+            this.lblSelectedHeading.Text = "Selected Date";
+            // 
+            // lblDate
+            // 
+            this.lblDate.AutoSize = true;
+            this.lblDate.Depth = 0;
+            this.lblDate.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblDate.Location = new System.Drawing.Point(14, 14);
+            this.lblDate.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblDate.Name = "lblDate";
+            this.lblDate.Size = new System.Drawing.Size(34, 19);
+            this.lblDate.TabIndex = 13;
+            this.lblDate.Text = "Date";
+            // 
+            // lblTime
+            // 
+            this.lblTime.AutoSize = true;
+            this.lblTime.Depth = 0;
+            this.lblTime.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblTime.Location = new System.Drawing.Point(343, 14);
+            this.lblTime.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblTime.Name = "lblTime";
+            this.lblTime.Size = new System.Drawing.Size(37, 19);
+            this.lblTime.TabIndex = 11;
+            this.lblTime.Text = "Time";
+            // 
+            // cmbTime
+            // 
+            this.cmbTime.AutoResize = false;
+            this.cmbTime.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cmbTime.Depth = 0;
+            this.cmbTime.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cmbTime.DropDownHeight = 174;
+            this.cmbTime.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTime.DropDownWidth = 121;
+            this.cmbTime.Font = new System.Drawing.Font("Roboto Medium", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.cmbTime.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.cmbTime.FormattingEnabled = true;
+            this.cmbTime.IntegralHeight = false;
+            this.cmbTime.ItemHeight = 43;
+            this.cmbTime.Location = new System.Drawing.Point(346, 38);
+            this.cmbTime.MaxDropDownItems = 4;
+            this.cmbTime.MouseState = MaterialSkin.MouseState.OUT;
+            this.cmbTime.Name = "cmbTime";
+            this.cmbTime.Size = new System.Drawing.Size(266, 49);
+            this.cmbTime.StartIndex = 0;
+            this.cmbTime.TabIndex = 12;
+            this.cmbTime.SelectedIndexChanged += new System.EventHandler(this.cmbTime_SelectedIndexChanged);
+            // 
+            // calDate
+            // 
+            this.calDate.Location = new System.Drawing.Point(17, 38);
+            this.calDate.MaxSelectionCount = 1;
+            this.calDate.Name = "calDate";
+            this.calDate.TabIndex = 9;
+            this.calDate.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.calDate_DateChanged);
+            // 
+            // lblBooking
+            // 
+            this.lblBooking.AutoSize = true;
+            this.lblBooking.Depth = 0;
+            this.lblBooking.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblBooking.Location = new System.Drawing.Point(144, 156);
+            this.lblBooking.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblBooking.Name = "lblBooking";
+            this.lblBooking.Size = new System.Drawing.Size(59, 19);
+            this.lblBooking.TabIndex = 4;
+            this.lblBooking.Text = "Booking";
+            // 
+            // cardProcedure
+            // 
+            this.cardProcedure.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cardProcedure.Controls.Add(this.cmbProcedure);
+            this.cardProcedure.Depth = 0;
+            this.cardProcedure.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.cardProcedure.Location = new System.Drawing.Point(476, 59);
+            this.cardProcedure.Margin = new System.Windows.Forms.Padding(14);
+            this.cardProcedure.MouseState = MaterialSkin.MouseState.HOVER;
+            this.cardProcedure.Name = "cardProcedure";
+            this.cardProcedure.Padding = new System.Windows.Forms.Padding(14);
+            this.cardProcedure.Size = new System.Drawing.Size(301, 83);
+            this.cardProcedure.TabIndex = 3;
+            // 
+            // cmbProcedure
+            // 
+            this.cmbProcedure.AutoResize = false;
+            this.cmbProcedure.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cmbProcedure.Depth = 0;
+            this.cmbProcedure.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cmbProcedure.DropDownHeight = 174;
+            this.cmbProcedure.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbProcedure.DropDownWidth = 121;
+            this.cmbProcedure.Font = new System.Drawing.Font("Roboto Medium", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.cmbProcedure.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.cmbProcedure.FormattingEnabled = true;
+            this.cmbProcedure.IntegralHeight = false;
+            this.cmbProcedure.ItemHeight = 43;
+            this.cmbProcedure.Location = new System.Drawing.Point(17, 17);
+            this.cmbProcedure.MaxDropDownItems = 4;
+            this.cmbProcedure.MouseState = MaterialSkin.MouseState.OUT;
+            this.cmbProcedure.Name = "cmbProcedure";
+            this.cmbProcedure.Size = new System.Drawing.Size(266, 49);
+            this.cmbProcedure.StartIndex = 0;
+            this.cmbProcedure.TabIndex = 0;
+            // 
+            // lblProcedure
+            // 
+            this.lblProcedure.AutoSize = true;
+            this.lblProcedure.Depth = 0;
+            this.lblProcedure.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblProcedure.Location = new System.Drawing.Point(473, 26);
+            this.lblProcedure.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblProcedure.Name = "lblProcedure";
+            this.lblProcedure.Size = new System.Drawing.Size(72, 19);
+            this.lblProcedure.TabIndex = 2;
+            this.lblProcedure.Text = "Procedure";
+            // 
+            // cardPatient
+            // 
+            this.cardPatient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cardPatient.Controls.Add(this.cmbEmail);
+            this.cardPatient.Depth = 0;
+            this.cardPatient.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.cardPatient.Location = new System.Drawing.Point(147, 59);
+            this.cardPatient.Margin = new System.Windows.Forms.Padding(14);
+            this.cardPatient.MouseState = MaterialSkin.MouseState.HOVER;
+            this.cardPatient.Name = "cardPatient";
+            this.cardPatient.Padding = new System.Windows.Forms.Padding(14);
+            this.cardPatient.Size = new System.Drawing.Size(301, 83);
+            this.cardPatient.TabIndex = 1;
+            // 
+            // cmbEmail
+            // 
+            this.cmbEmail.AutoResize = false;
+            this.cmbEmail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cmbEmail.Depth = 0;
+            this.cmbEmail.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cmbEmail.DropDownHeight = 174;
+            this.cmbEmail.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbEmail.DropDownWidth = 121;
+            this.cmbEmail.Font = new System.Drawing.Font("Roboto Medium", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.cmbEmail.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.cmbEmail.FormattingEnabled = true;
+            this.cmbEmail.IntegralHeight = false;
+            this.cmbEmail.ItemHeight = 43;
+            this.cmbEmail.Location = new System.Drawing.Point(17, 17);
+            this.cmbEmail.MaxDropDownItems = 4;
+            this.cmbEmail.MouseState = MaterialSkin.MouseState.OUT;
+            this.cmbEmail.Name = "cmbEmail";
+            this.cmbEmail.Size = new System.Drawing.Size(266, 49);
+            this.cmbEmail.StartIndex = 0;
+            this.cmbEmail.TabIndex = 0;
+            // 
+            // lblPatient
+            // 
+            this.lblPatient.AutoSize = true;
+            this.lblPatient.Depth = 0;
+            this.lblPatient.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblPatient.Location = new System.Drawing.Point(144, 26);
+            this.lblPatient.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblPatient.Name = "lblPatient";
+            this.lblPatient.Size = new System.Drawing.Size(51, 19);
+            this.lblPatient.TabIndex = 0;
+            this.lblPatient.Text = "Patient";
             // 
             // tabRegiser
             // 
@@ -376,7 +630,7 @@
             this.tabRegiser.Location = new System.Drawing.Point(4, 22);
             this.tabRegiser.Margin = new System.Windows.Forms.Padding(0);
             this.tabRegiser.Name = "tabRegiser";
-            this.tabRegiser.Size = new System.Drawing.Size(921, 486);
+            this.tabRegiser.Size = new System.Drawing.Size(921, 492);
             this.tabRegiser.TabIndex = 1;
             this.tabRegiser.Text = "Register Patient";
             // 
@@ -400,6 +654,12 @@
             this.cardGV.ResumeLayout(false);
             this.cardGV.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAppointments)).EndInit();
+            this.tabCreateAppointment.ResumeLayout(false);
+            this.tabCreateAppointment.PerformLayout();
+            this.cardBooking.ResumeLayout(false);
+            this.cardBooking.PerformLayout();
+            this.cardProcedure.ResumeLayout(false);
+            this.cardPatient.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -425,6 +685,21 @@
         private MaterialSkin.Controls.MaterialRadioButton rdoCompleted;
         private MaterialSkin.Controls.MaterialLabel lblFilter;
         private System.Windows.Forms.DataGridView dgvAppointments;
+        private MaterialSkin.Controls.MaterialCard cardPatient;
+        private MaterialSkin.Controls.MaterialComboBox cmbEmail;
+        private MaterialSkin.Controls.MaterialLabel lblPatient;
+        private MaterialSkin.Controls.MaterialCard cardProcedure;
+        private MaterialSkin.Controls.MaterialComboBox cmbProcedure;
+        private MaterialSkin.Controls.MaterialLabel lblProcedure;
+        private MaterialSkin.Controls.MaterialComboBox cmbTime;
+        private MaterialSkin.Controls.MaterialLabel lblTime;
+        private MaterialSkin.Controls.MaterialCard cardBooking;
+        private System.Windows.Forms.MonthCalendar calDate;
+        private MaterialSkin.Controls.MaterialLabel lblBooking;
+        private MaterialSkin.Controls.MaterialLabel lblDate;
+        private MaterialSkin.Controls.MaterialLabel lblSelectedDate;
+        private MaterialSkin.Controls.MaterialLabel lblSelectedHeading;
+        private MaterialSkin.Controls.MaterialButton btnCreate;
     }
 }
 

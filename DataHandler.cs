@@ -1,6 +1,8 @@
-﻿using System;
+﻿using MaterialSkin.Controls;
+using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
@@ -22,7 +24,7 @@ namespace Desktop_44905165
             try
             {
                 // get path to database - this is specific to the folder structure of the parent folder
-                // this prevents problems related to database copy in output directory when using |DataDirectory|
+                // this prevents problems related to the database copy in output directory when using |DataDirectory|
                 string parentFolder = AppDomain.CurrentDomain.BaseDirectory;
                 string relativePath = @"..\..\BrightonMedical.mdf";
                 string databasePath = Path.GetFullPath(Path.Combine(parentFolder, relativePath));
@@ -104,7 +106,54 @@ namespace Desktop_44905165
             }
         }
 
-        public void ExecuteUpdate(SqlCommand cmd)
+        public DataSet GetDataSet(SqlCommand cmd)
+        {
+            // for use with combo boxes
+
+            try
+            {
+                // uses sql select statement to fill dataset with required column
+                conn.Open();
+
+                DataSet dataSet = new DataSet();
+
+                adapter.SelectCommand = cmd;
+                adapter.Fill(dataSet);
+
+                cmd.Dispose();
+
+                conn.Close();
+
+                return dataSet;
+            }
+            catch (SqlException ex)
+            {
+                // error message
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
+        public void FillComboBox(DataSet dataSet, ref MaterialComboBox cmbRef, string column)
+        {
+            // uses dataset loaded with above function to associate combo box with column
+
+            try
+            {
+                cmbRef.DisplayMember = column;
+                cmbRef.ValueMember = column;
+                cmbRef.DataSource = dataSet.Tables[0];
+            }
+            catch (Exception ex)
+            {
+                // error message
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
+        }
+
+        public bool ExecuteUpdate(SqlCommand cmd)
         {
             try
             {
@@ -117,20 +166,24 @@ namespace Desktop_44905165
                 cmd.Dispose();
 
                 conn.Close();
+
+                return true;
             }
             catch (SqlException ex)
             {
                 // error message
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 System.Diagnostics.Debug.WriteLine(ex.Message);
+
+                return false;
             }
 
         }
-        public void ExecuteDelete(SqlCommand cmd)
+        public bool ExecuteDelete(SqlCommand cmd)
         {
             try
             {
-                // uses sql delete statement to update database
+                // uses sql delete statement to delete record from database
                 conn.Open();
 
                 adapter.DeleteCommand = cmd;
@@ -139,12 +192,42 @@ namespace Desktop_44905165
                 cmd.Dispose();
 
                 conn.Close();
+
+                return true;
             }
             catch(SqlException ex)
             {
                 // error message
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 System.Diagnostics.Debug.WriteLine(ex.Message);
+
+                return false;
+            }
+        }
+
+        public bool ExecuteInsert(SqlCommand cmd)
+        {
+            try
+            {
+                // uses sql insert statement to insert record into database
+                conn.Open();
+
+                adapter.InsertCommand = cmd;
+                adapter.InsertCommand.ExecuteNonQuery();
+
+                cmd.Dispose();
+
+                conn.Close();
+
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                // error message
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+
+                return false;
             }
         }
 
