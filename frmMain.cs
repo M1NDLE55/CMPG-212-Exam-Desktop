@@ -16,6 +16,7 @@ namespace Desktop_44905165
     public partial class frmMain : MaterialForm
     {
         DataHandler handler;
+        private string currentFilter = "";
         
         public frmMain()
         {
@@ -34,7 +35,7 @@ namespace Desktop_44905165
             handler = new DataHandler();            
         }
 
-        private void DisplayAppointments(string status = "") // add default param value instead of overloading function
+        private void DisplayAppointments(string status = "") // use default param value instead of overloading function
         {
             // get appointment details
             string sql =
@@ -47,7 +48,11 @@ namespace Desktop_44905165
 
             SqlCommand cmd = new SqlCommand(sql, handler.conn);
 
-            if (status != "") cmd.Parameters.AddWithValue("@status", status);
+            if (status != "")
+            {
+                // add parameter to query
+                cmd.Parameters.AddWithValue("@status", status);
+            }
 
             // populate datagridview
             handler.FillDataGridView(cmd, ref dgvAppointments);
@@ -73,7 +78,8 @@ namespace Desktop_44905165
 
         private void tabViewAppointments_Enter(object sender, EventArgs e)
         {
-            DisplayAppointments();
+            // set default filter that also fires radio button event and loads datagridview
+            rdoNone.Checked = true;
         }
 
         private bool ValidStatus(string action)
@@ -118,8 +124,8 @@ namespace Desktop_44905165
 
             handler.ExecuteUpdate(cmd);
 
-            // refresh datagridview
-            DisplayAppointments();
+            // refresh datagridview with active filter
+            DisplayAppointments(currentFilter);
         }
 
         private void UpdateAppointmentStatus(string status)
@@ -154,8 +160,8 @@ namespace Desktop_44905165
 
             UpdateAppointmentStatus(reason);
 
-            // refresh datagridview
-            DisplayAppointments();
+            // refresh datagridview with active filter
+            DisplayAppointments(currentFilter);
         }
 
         private void btnComplete_Click(object sender, EventArgs e)
@@ -178,34 +184,42 @@ namespace Desktop_44905165
 
             UpdateAppointmentStatus("Completed");
 
-            // refresh datagridview
-            DisplayAppointments();
+            // refresh datagridview with active filter
+            DisplayAppointments(currentFilter);
         }
 
         #region Filter appointments radio buttons
 
         private void FilterAppointments()
         {
+            // filter appointments by status
             if (rdoNone.Checked)
             {
-                DisplayAppointments();
+                currentFilter = "";
             }
             else if(rdoOpen.Checked)
             {
-                DisplayAppointments("Open");
+                currentFilter = "Open";
             }
             else if(rdoCompleted.Checked)
             {
-                DisplayAppointments("Completed");
+                currentFilter = "Completed";
             }
             else if(rdoCancelled.Checked)
             {
-                DisplayAppointments("Cancelled");
+                currentFilter = "Cancelled";
             }
             else if (rdoNoShow.Checked)
             {
-                DisplayAppointments("No show");
+                currentFilter = "No show";
             }
+            else
+            {
+                // early return when a radio button is unchecked but fires CheckedChanged event
+                return;
+            }
+
+            DisplayAppointments(currentFilter);
         }      
 
         private void rdoNone_CheckedChanged(object sender, EventArgs e)

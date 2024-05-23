@@ -72,7 +72,7 @@
             this.rtbInvoice.Location = new System.Drawing.Point(55, 17);
             this.rtbInvoice.Name = "rtbInvoice";
             this.rtbInvoice.ReadOnly = true;
-            this.rtbInvoice.Size = new System.Drawing.Size(232, 254);
+            this.rtbInvoice.Size = new System.Drawing.Size(267, 254);
             this.rtbInvoice.TabIndex = 0;
             this.rtbInvoice.Text = "";
             // 
