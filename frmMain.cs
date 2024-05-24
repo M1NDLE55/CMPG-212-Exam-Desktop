@@ -122,6 +122,12 @@ namespace Desktop_44905165
                 MessageBox.Show("No date and time selected", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            else if (selectDate.newDate.Equals(startDate))
+            {
+                // don't update record if the new date is the same
+                MessageBox.Show("Appointment updated", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
 
             // get new date and time for appointment
             DateTime newDate = selectDate.newDate;
