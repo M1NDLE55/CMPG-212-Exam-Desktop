@@ -106,13 +106,12 @@ namespace Desktop_44905165
             }
         }
 
-        public DataSet GetDataSet(SqlCommand cmd)
+        public void FillComboBox(SqlCommand cmd, ref MaterialComboBox cmbRef, string column)
         {
-            // for use with combo boxes
+            // creates and assigns a new dataset to a combo box
 
             try
             {
-                // uses sql select statement to fill dataset with required column
                 conn.Open();
 
                 DataSet dataSet = new DataSet();
@@ -124,23 +123,7 @@ namespace Desktop_44905165
 
                 conn.Close();
 
-                return dataSet;
-            }
-            catch (SqlException ex)
-            {
-                // error message
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                System.Diagnostics.Debug.WriteLine(ex.Message);
-                return null;
-            }
-        }
-
-        public void FillComboBox(DataSet dataSet, ref MaterialComboBox cmbRef, string column)
-        {
-            // uses dataset loaded with above function to associate combo box with column
-
-            try
-            {
+                // assign desired column to dataset
                 cmbRef.DisplayMember = column;
                 cmbRef.ValueMember = column;
                 cmbRef.DataSource = dataSet.Tables[0];

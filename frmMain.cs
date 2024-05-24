@@ -19,8 +19,7 @@ namespace Desktop_44905165
 {
     public partial class frmMain : MaterialForm
     {
-        // each tab has its own datahandler since they function as separate forms with unique datasets
-        DataHandler handlerView, handlerCreate, handlerPatient;
+        DataHandler handler;
 
         // view appointments tab
         private string currentFilter = "";
@@ -30,21 +29,13 @@ namespace Desktop_44905165
         
         public frmMain()
         {
-            InitializeComponent();
-
-            //initialize color scheme
-            //var materialSkinManager = MaterialSkinManager.Instance;
-            //materialSkinManager.AddFormToManage(this);
-            //materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
-            //materialSkinManager.ColorScheme = new ColorScheme(Primary.Green400, Primary.Cyan600, Primary.Cyan500, Accent.LightBlue200, TextShade.WHITE);
+            InitializeComponent();         
         }
 
         private void frmMain_Load(object sender, EventArgs e)
         {
             // create database handlers
-            handlerView = new DataHandler();            
-            handlerCreate = new DataHandler();            
-            handlerPatient = new DataHandler();            
+            handler = new DataHandler();        
         }
 
         // ------ VIEW APPOINTMENTS TAB ------
@@ -60,7 +51,7 @@ namespace Desktop_44905165
                     // filter appointments by status
                     (status != "" ? "where status = @status" : "");
 
-            SqlCommand cmd = new SqlCommand(sql, handlerView.conn);
+            SqlCommand cmd = new SqlCommand(sql, handler.conn);
 
             if (status != "")
             {
@@ -69,7 +60,7 @@ namespace Desktop_44905165
             }
 
             // populate datagridview
-            handlerView.FillDataGridView(cmd, ref dgvAppointments);
+            handler.FillDataGridView(cmd, ref dgvAppointments);
 
             // no columns exist if no appointments exist
             if (dgvAppointments.Rows.Count != 0)
@@ -116,9 +107,14 @@ namespace Desktop_44905165
             if (!ValidStatus("moved")) return;
 
             int id = int.Parse(GetAppointmentValue("ap_id"));
+            DateTime startDate = DateTime.Parse(GetAppointmentValue("Booking"));
 
             // open date and time picker form
             frmSelectDate selectDate = new frmSelectDate();
+
+            // set initial date on select form
+            selectDate.newDate = startDate;
+
             selectDate.ShowDialog();
 
             if (!selectDate.isSelected)
@@ -132,12 +128,12 @@ namespace Desktop_44905165
 
             // update appointment date
             string sql = @"update appointment set booking_time = @newDate where id = @id";
-            SqlCommand cmd = new SqlCommand(sql,handlerView.conn);
+            SqlCommand cmd = new SqlCommand(sql,handler.conn);
 
             cmd.Parameters.AddWithValue("@newDate", newDate);
             cmd.Parameters.AddWithValue("@id", id);
 
-            if (handlerView.ExecuteUpdate(cmd))
+            if (handler.ExecuteUpdate(cmd))
             {
                 MessageBox.Show("Appointment updated", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -152,12 +148,12 @@ namespace Desktop_44905165
 
             // update appointment status
             string sql = @"update appointment set status = @status where id = @id";
-            SqlCommand cmd = new SqlCommand(sql, handlerView.conn);
+            SqlCommand cmd = new SqlCommand(sql, handler.conn);
 
             cmd.Parameters.AddWithValue("@status", status);
             cmd.Parameters.AddWithValue("@id", id);
 
-            if (handlerView.ExecuteUpdate(cmd))
+            if (handler.ExecuteUpdate(cmd))
             {
                 MessageBox.Show("Appointment updated", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }       
@@ -217,11 +213,11 @@ namespace Desktop_44905165
 
                 // delete appointment
                 string sql = @"delete appointment where id = @id";
-                SqlCommand cmd = new SqlCommand(sql, handlerView.conn);
+                SqlCommand cmd = new SqlCommand(sql, handler.conn);
 
                 cmd.Parameters.AddWithValue("@id", id);
 
-                if(handlerView.ExecuteDelete(cmd))
+                if(handler.ExecuteDelete(cmd))
                 {
                     MessageBox.Show("Appointment removed", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -297,14 +293,12 @@ namespace Desktop_44905165
         private void tabCreateAppointment_Enter(object sender, EventArgs e)
         {
             // get patient emails since they're unique - names and surnames may have duplicates
-            SqlCommand cmdEmails = new SqlCommand(@"select email from patient order by email asc", handlerCreate.conn);
-            DataSet dsEmails = handlerCreate.GetDataSet(cmdEmails);
-            handlerCreate.FillComboBox(dsEmails ,ref cmbEmail, "email");
+            SqlCommand cmdEmails = new SqlCommand(@"select email from patient order by email asc", handler.conn);
+            handler.FillComboBox(cmdEmails ,ref cmbEmail, "email");
 
             // get procedures offered
-            SqlCommand cmdProcedures = new SqlCommand(@"select name from [procedure] order by name asc", handlerCreate.conn);
-            DataSet dsProcedures = handlerCreate.GetDataSet(cmdProcedures);
-            handlerCreate.FillComboBox(dsProcedures, ref cmbProcedure, "name");
+            SqlCommand cmdProcedures = new SqlCommand(@"select name from [procedure] order by name asc", handler.conn);
+            handler.FillComboBox(cmdProcedures, ref cmbProcedure, "name");
 
             // config calendar control
             calDate.MaxSelectionCount = 1;
@@ -336,6 +330,12 @@ namespace Desktop_44905165
             string email = cmbEmail.Text;
             string procedure = cmbProcedure.Text;
 
+            if (selectedDate < DateTime.Now)
+            {
+                MessageBox.Show("Select an upcoming date and time", "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             // insert a record into appointment using ids from other tables
             string sql =
                 @"insert into appointment (patient_id, procedure_id, booking_time, status) " +
@@ -345,13 +345,13 @@ namespace Desktop_44905165
                 "@booking_time," +
                 "'Open') ";
 
-            SqlCommand cmd = new SqlCommand(sql,handlerCreate.conn);
+            SqlCommand cmd = new SqlCommand(sql,handler.conn);
 
             cmd.Parameters.AddWithValue("@email",email);
             cmd.Parameters.AddWithValue("@name",procedure);
             cmd.Parameters.AddWithValue("@booking_time",selectedDate);
 
-            if (handlerCreate.ExecuteInsert(cmd))
+            if (handler.ExecuteInsert(cmd))
             {
                 MessageBox.Show("Appointment created", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -374,7 +374,6 @@ namespace Desktop_44905165
             if (string.IsNullOrEmpty(name))
             {
                 errProvider.SetError(txtName, "Required*");
-                txtName.Focus();
                 hasError = true;
             }
 
@@ -382,7 +381,6 @@ namespace Desktop_44905165
             if (string.IsNullOrEmpty(surname))
             {
                 errProvider.SetError(txtSurname, "Required*");
-                txtSurname.Focus();
                 hasError = true;
             }
 
@@ -392,13 +390,11 @@ namespace Desktop_44905165
             if (string.IsNullOrEmpty(number))
             {
                 errProvider.SetError(txtNumber, "Required*");
-                txtNumber.Focus();
                 hasError = true;
             }
             else if (!numberRegex.IsMatch(number))
             {
                 errProvider.SetError(txtNumber, "Invalid format*");
-                txtNumber.Focus();
                 hasError = true;
             }
             
@@ -406,13 +402,11 @@ namespace Desktop_44905165
             if (string.IsNullOrEmpty(emergency))
             {
                 errProvider.SetError(txtEmergency, "Required*");
-                txtEmergency.Focus();
                 hasError = true;
             }
             else if (!numberRegex.IsMatch(emergency))
             {
                 errProvider.SetError(txtEmergency, "Invalid format*");
-                txtEmergency.Focus();
                 hasError = true;
             }
 
@@ -422,13 +416,11 @@ namespace Desktop_44905165
             if (string.IsNullOrEmpty(email))
             {
                 errProvider.SetError(txtEmail, "Required*");
-                txtEmail.Focus();
                 hasError = true;
             }
             else if (!emailRegex.IsMatch(email))
             {
                 errProvider.SetError(txtEmail, "Invalid format*");
-                txtEmail.Focus();
                 hasError = true;
             }
 
@@ -448,7 +440,7 @@ namespace Desktop_44905165
                 @"insert into patient (name, surname, number, email, emergency_contact) " +
                 "values (@name, @surname, @number, @email, @emergency_contact)";
 
-            SqlCommand cmdPatient = new SqlCommand(sqlPatient, handlerPatient.conn);
+            SqlCommand cmdPatient = new SqlCommand(sqlPatient, handler.conn);
 
             cmdPatient.Parameters.AddWithValue("@name", name);
             cmdPatient.Parameters.AddWithValue("@surname", surname);
@@ -457,27 +449,27 @@ namespace Desktop_44905165
             cmdPatient.Parameters.AddWithValue("@emergency_contact", emergency);
 
             // only continue if patient was inserted correctly
-            if (!handlerPatient.ExecuteInsert(cmdPatient))
+            if (!handler.ExecuteInsert(cmdPatient))
             {
                 MessageBox.Show("Something unexpected happend", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             // get new patient's id to reduce query load in loop
-            SqlCommand cmdID = new SqlCommand(@"select id from patient where email = @email", handlerPatient.conn);
+            SqlCommand cmdID = new SqlCommand(@"select id from patient where email = @email", handler.conn);
             cmdID.Parameters.AddWithValue("@email", email);
 
-            int patientID = int.Parse(handlerPatient.GetRowValues(cmdID)[0]);
+            int patientID = int.Parse(handler.GetRowValues(cmdID)[0]);
 
             // add allergies
             foreach (string allergy in allergies)
             {
-                SqlCommand cmdAllergy = new SqlCommand(@"insert into allergy (patient_id, allergy) values (@patient_id, @allergy)", handlerPatient.conn);
+                SqlCommand cmdAllergy = new SqlCommand(@"insert into allergy (patient_id, allergy) values (@patient_id, @allergy)", handler.conn);
 
                 cmdAllergy.Parameters.AddWithValue("@patient_id", patientID);
                 cmdAllergy.Parameters.AddWithValue("@allergy", allergy);
 
-                handlerPatient.ExecuteInsert(cmdAllergy);
+                handler.ExecuteInsert(cmdAllergy);
             }
 
             MessageBox.Show("Patient added", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -499,14 +491,12 @@ namespace Desktop_44905165
             if (string.IsNullOrEmpty(allergy))
             {
                 errProvider.SetError(txtAllergy, "Required*");
-                txtAllergy.Focus();
                 return;
             }
 
             // add allergy to list box
             lstAllergies.Items.Add(new MaterialListBoxItem(allergy));
             txtAllergy.Clear();
-            txtAllergy.Focus();
         }
 
         private void btnRemoveAllergy_Click(object sender, EventArgs e)

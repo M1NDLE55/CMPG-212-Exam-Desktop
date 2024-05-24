@@ -55,14 +55,17 @@
             this.cardDate.Name = "cardDate";
             this.cardDate.Padding = new System.Windows.Forms.Padding(14);
             this.cardDate.Size = new System.Drawing.Size(274, 207);
-            this.cardDate.TabIndex = 0;
+            this.cardDate.TabIndex = 1;
             // 
             // calDate
             // 
+            this.calDate.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.calDate.Location = new System.Drawing.Point(23, 23);
             this.calDate.MaxSelectionCount = 1;
             this.calDate.Name = "calDate";
+            this.calDate.RightToLeftLayout = true;
             this.calDate.TabIndex = 0;
+            this.calDate.TodayDate = new System.DateTime(2024, 5, 24, 0, 0, 0, 0);
             this.calDate.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.calDate_DateChanged);
             // 
             // lblDate
@@ -74,13 +77,14 @@
             this.lblDate.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(34, 19);
-            this.lblDate.TabIndex = 1;
+            this.lblDate.TabIndex = 0;
             this.lblDate.Text = "Date";
             // 
             // btnConfirm
             // 
             this.btnConfirm.AutoSize = false;
             this.btnConfirm.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnConfirm.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnConfirm.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.btnConfirm.Depth = 0;
             this.btnConfirm.HighEmphasis = true;
@@ -91,7 +95,7 @@
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.NoAccentTextColor = System.Drawing.Color.Empty;
             this.btnConfirm.Size = new System.Drawing.Size(576, 36);
-            this.btnConfirm.TabIndex = 2;
+            this.btnConfirm.TabIndex = 6;
             this.btnConfirm.Text = "Confirm";
             this.btnConfirm.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnConfirm.UseAccentColor = true;
@@ -107,7 +111,7 @@
             this.lblTime.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblTime.Name = "lblTime";
             this.lblTime.Size = new System.Drawing.Size(37, 19);
-            this.lblTime.TabIndex = 3;
+            this.lblTime.TabIndex = 2;
             this.lblTime.Text = "Time";
             // 
             // cardTime
@@ -122,12 +126,13 @@
             this.cardTime.Name = "cardTime";
             this.cardTime.Padding = new System.Windows.Forms.Padding(14);
             this.cardTime.Size = new System.Drawing.Size(274, 84);
-            this.cardTime.TabIndex = 4;
+            this.cardTime.TabIndex = 3;
             // 
             // cmbTime
             // 
             this.cmbTime.AutoResize = false;
             this.cmbTime.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cmbTime.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cmbTime.Depth = 0;
             this.cmbTime.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cmbTime.DropDownHeight = 174;
@@ -183,7 +188,7 @@
             this.lblDateTimeHeading.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblDateTimeHeading.Name = "lblDateTimeHeading";
             this.lblDateTimeHeading.Size = new System.Drawing.Size(134, 19);
-            this.lblDateTimeHeading.TabIndex = 6;
+            this.lblDateTimeHeading.TabIndex = 4;
             this.lblDateTimeHeading.Text = "New Booking Time";
             // 
             // frmSelectDate

@@ -13,7 +13,7 @@ namespace Desktop_44905165
 {
     public partial class frmSelectDate : MaterialForm
     {
-        public DateTime newDate;
+        public DateTime newDate { get; set; }
         public bool isSelected = false;
 
         public frmSelectDate()
@@ -23,7 +23,7 @@ namespace Desktop_44905165
 
         private void frmSelectDate_Load(object sender, EventArgs e)
         {
-            // config calendar control
+            // config calendar control                   
             calDate.MaxSelectionCount = 1;
             calDate.MinDate = DateTime.Now;
             calDate.MaxDate = DateTime.Now.AddYears(1);
@@ -37,21 +37,27 @@ namespace Desktop_44905165
             }
             while (!timeSlots.Equals(new DateTime(2000, 1, 1, 16, 30, 0)));
 
-            // config combobox
-            cmbTime.SelectedIndex = 0;
-
-            UpdateDate();
+            // set to current booking date and time - can't use newDate directly because setting cmbTime/calDate fires event that updates newDate
+            DateTime start = newDate;
+            cmbTime.Text = start.ToShortTimeString();
+            calDate.SelectionRange = new SelectionRange(start, start);
         }
 
         private void UpdateDate()
         {
-            // update preliminary date 
-            newDate = DateTime.Parse($"{calDate.SelectionEnd.ToShortDateString()} {cmbTime.Text}:00");
+            // update date 
+            newDate = DateTime.Parse($"{calDate.SelectionEnd.ToShortDateString()} {cmbTime.Text}");
             lblNewDateTime.Text = newDate.ToString();
         }
 
         private void btnConfirm_Click(object sender, EventArgs e)
         {
+            if (newDate < DateTime.Now)
+            {
+                MessageBox.Show("Select an upcoming date and time", "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             isSelected = true;
             Close();
         }

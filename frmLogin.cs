@@ -1,4 +1,5 @@
-﻿using MaterialSkin.Controls;
+﻿using MaterialSkin;
+using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,6 +19,12 @@ namespace Desktop_44905165
         public frmLogin()
         {
             InitializeComponent();
+
+            //initialize color scheme
+            var materialSkinManager = MaterialSkinManager.Instance;
+            materialSkinManager.AddFormToManage(this);
+            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+            materialSkinManager.ColorScheme = new ColorScheme(Primary.Blue400, Primary.Blue700, Primary.Blue200, Accent.Green700, TextShade.WHITE);
         }
 
         private void frmLogin_Load(object sender, EventArgs e)
@@ -28,11 +35,8 @@ namespace Desktop_44905165
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            //string username = txtUsername.Text;
-            //string password = txtPassword.Text;
-
-            string username = "adminOne";
-            string password = "supersafe";
+            string username = txtUsername.Text;
+            string password = txtPassword.Text;
 
             // input validation
             bool hasError = false;
@@ -42,7 +46,6 @@ namespace Desktop_44905165
             if (string.IsNullOrEmpty(username))
             {
                 errProvider.SetError(txtUsername, "Required*");
-                txtUsername.Focus();
                 hasError = true;
             }
 
@@ -50,7 +53,6 @@ namespace Desktop_44905165
             if (string.IsNullOrEmpty(password))
             {
                 errProvider.SetError(txtPassword, "Required*");
-                txtPassword.Focus();
                 hasError = true;
             }
 
@@ -69,13 +71,11 @@ namespace Desktop_44905165
                 // show login form when dashboard closes
                 txtUsername.Clear();
                 txtPassword.Clear();
-                txtUsername.Focus();
                 Show();
             }
             else
             {
                 MessageBox.Show("Incorrect username or password", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                txtUsername.Focus();
             }
         }
     }

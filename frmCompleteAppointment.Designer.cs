@@ -80,6 +80,7 @@
             // 
             this.btnSave.AutoSize = false;
             this.btnSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSave.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.btnSave.Depth = 0;
             this.btnSave.HighEmphasis = true;
@@ -101,6 +102,7 @@
             // 
             this.btnComplete.AutoSize = false;
             this.btnComplete.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnComplete.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnComplete.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.btnComplete.Depth = 0;
             this.btnComplete.HighEmphasis = true;

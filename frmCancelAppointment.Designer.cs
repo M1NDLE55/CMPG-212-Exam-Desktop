@@ -30,9 +30,9 @@
         {
             this.lblReason = new MaterialSkin.Controls.MaterialLabel();
             this.cardReason = new MaterialSkin.Controls.MaterialCard();
-            this.btnConfirm = new MaterialSkin.Controls.MaterialButton();
-            this.rdoCancelled = new MaterialSkin.Controls.MaterialRadioButton();
             this.rdoNoShow = new MaterialSkin.Controls.MaterialRadioButton();
+            this.rdoCancelled = new MaterialSkin.Controls.MaterialRadioButton();
+            this.btnConfirm = new MaterialSkin.Controls.MaterialButton();
             this.cardReason.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -63,10 +63,45 @@
             this.cardReason.Size = new System.Drawing.Size(263, 65);
             this.cardReason.TabIndex = 1;
             // 
+            // rdoNoShow
+            // 
+            this.rdoNoShow.AutoSize = true;
+            this.rdoNoShow.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.rdoNoShow.Depth = 0;
+            this.rdoNoShow.Location = new System.Drawing.Point(142, 14);
+            this.rdoNoShow.Margin = new System.Windows.Forms.Padding(0);
+            this.rdoNoShow.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdoNoShow.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdoNoShow.Name = "rdoNoShow";
+            this.rdoNoShow.Ripple = true;
+            this.rdoNoShow.Size = new System.Drawing.Size(97, 37);
+            this.rdoNoShow.TabIndex = 1;
+            this.rdoNoShow.TabStop = true;
+            this.rdoNoShow.Text = "No show";
+            this.rdoNoShow.UseVisualStyleBackColor = true;
+            // 
+            // rdoCancelled
+            // 
+            this.rdoCancelled.AutoSize = true;
+            this.rdoCancelled.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.rdoCancelled.Depth = 0;
+            this.rdoCancelled.Location = new System.Drawing.Point(14, 14);
+            this.rdoCancelled.Margin = new System.Windows.Forms.Padding(0);
+            this.rdoCancelled.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.rdoCancelled.MouseState = MaterialSkin.MouseState.HOVER;
+            this.rdoCancelled.Name = "rdoCancelled";
+            this.rdoCancelled.Ripple = true;
+            this.rdoCancelled.Size = new System.Drawing.Size(104, 37);
+            this.rdoCancelled.TabIndex = 0;
+            this.rdoCancelled.TabStop = true;
+            this.rdoCancelled.Text = "Cancelled";
+            this.rdoCancelled.UseVisualStyleBackColor = true;
+            // 
             // btnConfirm
             // 
             this.btnConfirm.AutoSize = false;
             this.btnConfirm.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnConfirm.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnConfirm.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.btnConfirm.Depth = 0;
             this.btnConfirm.HighEmphasis = true;
@@ -83,38 +118,6 @@
             this.btnConfirm.UseAccentColor = true;
             this.btnConfirm.UseVisualStyleBackColor = true;
             this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
-            // 
-            // rdoCancelled
-            // 
-            this.rdoCancelled.AutoSize = true;
-            this.rdoCancelled.Depth = 0;
-            this.rdoCancelled.Location = new System.Drawing.Point(14, 14);
-            this.rdoCancelled.Margin = new System.Windows.Forms.Padding(0);
-            this.rdoCancelled.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.rdoCancelled.MouseState = MaterialSkin.MouseState.HOVER;
-            this.rdoCancelled.Name = "rdoCancelled";
-            this.rdoCancelled.Ripple = true;
-            this.rdoCancelled.Size = new System.Drawing.Size(104, 37);
-            this.rdoCancelled.TabIndex = 0;
-            this.rdoCancelled.TabStop = true;
-            this.rdoCancelled.Text = "Cancelled";
-            this.rdoCancelled.UseVisualStyleBackColor = true;
-            // 
-            // rdoNoShow
-            // 
-            this.rdoNoShow.AutoSize = true;
-            this.rdoNoShow.Depth = 0;
-            this.rdoNoShow.Location = new System.Drawing.Point(142, 14);
-            this.rdoNoShow.Margin = new System.Windows.Forms.Padding(0);
-            this.rdoNoShow.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.rdoNoShow.MouseState = MaterialSkin.MouseState.HOVER;
-            this.rdoNoShow.Name = "rdoNoShow";
-            this.rdoNoShow.Ripple = true;
-            this.rdoNoShow.Size = new System.Drawing.Size(97, 37);
-            this.rdoNoShow.TabIndex = 1;
-            this.rdoNoShow.TabStop = true;
-            this.rdoNoShow.Text = "No show";
-            this.rdoNoShow.UseVisualStyleBackColor = true;
             // 
             // frmCancelAppointment
             // 
