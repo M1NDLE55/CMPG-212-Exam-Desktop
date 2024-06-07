@@ -56,18 +56,15 @@ namespace Desktop_44905165
                 SqlDataReader dr = cmd.ExecuteReader();
 
                 // return state of record existence
+                bool result = false;
                 if (dr.Read())
                 {
-                    cmd.Dispose();
-                    conn.Close();
-                    return true;
+                    result = true;
                 }
-                else
-                {
-                    cmd.Dispose();
-                    conn.Close();
-                    return false;
-                }
+
+                cmd.Dispose();
+                conn.Close();
+                return result;
             }
             catch (SqlException ex)
             {
