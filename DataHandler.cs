@@ -144,13 +144,18 @@ namespace Desktop_44905165
                 conn.Open();
 
                 adapter.UpdateCommand = cmd;
-                adapter.UpdateCommand.ExecuteNonQuery();
+
+                bool result = false;
+                if (adapter.UpdateCommand.ExecuteNonQuery() > 0)
+                {
+                    result = true;
+                }
 
                 cmd.Dispose();
 
                 conn.Close();
 
-                return true;
+                return result;
             }
             catch (SqlException ex)
             {
@@ -170,13 +175,18 @@ namespace Desktop_44905165
                 conn.Open();
 
                 adapter.DeleteCommand = cmd;
-                adapter.DeleteCommand.ExecuteNonQuery();
+
+                bool result = false;
+                if (adapter.DeleteCommand.ExecuteNonQuery() > 0)
+                {
+                    result = true;
+                }
 
                 cmd.Dispose();
 
                 conn.Close();
 
-                return true;
+                return result;
             }
             catch(SqlException ex)
             {
@@ -196,13 +206,18 @@ namespace Desktop_44905165
                 conn.Open();
 
                 adapter.InsertCommand = cmd;
-                adapter.InsertCommand.ExecuteNonQuery();
+
+                bool result = false;
+                if (adapter.InsertCommand.ExecuteNonQuery() > 0)
+                {
+                    result = true;
+                }
 
                 cmd.Dispose();
 
                 conn.Close();
 
-                return true;
+                return result;
             }
             catch (SqlException ex)
             {
@@ -214,11 +229,11 @@ namespace Desktop_44905165
             }
         }
 
-        public string[] GetRowValues(SqlCommand cmd)
+        public string[] GetRowValues(SqlCommand cmd, int MAX_FIELDS = 50)
         {
             // returns array with fields in row
 
-            string[] data = new string[100];
+            string[] data = new string[MAX_FIELDS];
 
             try
             {
@@ -232,21 +247,20 @@ namespace Desktop_44905165
                     // get number of fields in row
                     int fields = dr.FieldCount;
 
+                    // populate array
                     for(int i = 0; i < fields; i++)
                     {
                         data[i] = dr[i].ToString();
                     }
-
-                    cmd.Dispose();
-                    conn.Close();
-                    return data;
                 }
                 else
                 {
-                    cmd.Dispose();
-                    conn.Close();
-                    return null;
-                }             
+                    data = null;
+                }
+
+                cmd.Dispose();
+                conn.Close();
+                return data;
             }
             catch (SqlException ex)
             {
