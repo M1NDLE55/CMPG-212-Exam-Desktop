@@ -42,40 +42,6 @@ namespace Desktop_44905165
             }
         }
 
-        public bool Login(string username, string password)
-        {
-            try
-            {
-                conn.Open();
-
-                // get a dummy row if a record exists
-                SqlCommand cmd = new SqlCommand(@"select 1 from admin where username = @username and password = @password", conn);
-                cmd.Parameters.AddWithValue("@username", username);
-                cmd.Parameters.AddWithValue("@password", password);
-
-                SqlDataReader dr = cmd.ExecuteReader();
-
-                // return state of record existence
-                bool result = false;
-                if (dr.Read())
-                {
-                    result = true;
-                }
-
-                cmd.Dispose();
-                conn.Close();
-                return result;
-            }
-            catch (SqlException ex)
-            {
-                // error message
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                System.Diagnostics.Debug.WriteLine(ex.Message);
-
-                return false;
-            }
-        }
-
         public void FillDataGridView(SqlCommand cmd, ref DataGridView dgv)
         {
             try
@@ -228,7 +194,7 @@ namespace Desktop_44905165
 
         public string[] GetRowValues(SqlCommand cmd, int MAX_FIELDS = 50)
         {
-            // returns array with fields in row
+            // returns array with fields of a single row
 
             string[] data = new string[MAX_FIELDS];
 

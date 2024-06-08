@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -57,9 +58,14 @@ namespace Desktop_44905165
             }
 
             if (hasError) return;
-         
-            
-            if (handler.Login(username, password))
+
+            // get a dummy row if a record exists
+            SqlCommand cmd = new SqlCommand(@"select 1 from admin where username = @username and password = @password", handler.conn);
+            cmd.Parameters.AddWithValue("@username", username);
+            cmd.Parameters.AddWithValue("@password", password);
+
+            // GetRowValues will return null if no record was found
+            if (handler.GetRowValues(cmd,1) != null )
             {
                 // hide login form
                 Hide();
