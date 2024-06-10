@@ -128,8 +128,8 @@ namespace Desktop_44905165
 
                 return false;
             }
-
         }
+
         public bool ExecuteDelete(SqlCommand cmd)
         {
             try

@@ -25,7 +25,6 @@ namespace Desktop_44905165
         {
             // config calendar control                   
             calDate.MaxSelectionCount = 1;
-            calDate.MinDate = DateTime.Now;
             calDate.MaxDate = DateTime.Now.AddYears(1);
 
             //load time slots into combobox
@@ -37,7 +36,7 @@ namespace Desktop_44905165
             }
             while (!timeSlots.Equals(new DateTime(2000, 1, 1, 16, 30, 0)));
 
-            // set to current booking date and time - can't use newDate directly because setting cmbTime/calDate fires event that updates newDate
+            // set calendar to current booking date and time - can't use newDate directly because setting cmbTime/calDate fires event that updates newDate
             DateTime start = newDate;
             cmbTime.Text = start.ToShortTimeString();
             calDate.SelectionRange = new SelectionRange(start, start);
@@ -52,6 +51,7 @@ namespace Desktop_44905165
 
         private void btnConfirm_Click(object sender, EventArgs e)
         {
+            // validate date
             if (newDate < DateTime.Now)
             {
                 MessageBox.Show("Select an upcoming date and time", "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Error);

@@ -34,13 +34,13 @@ namespace Desktop_44905165
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            // create database handlers
+            // create database handler
             handler = new DataHandler();        
         }
 
         // ------ VIEW APPOINTMENTS TAB ------
 
-        private void DisplayAppointments(string status = "") // use default param value instead of overloading function
+        private void DisplayAppointments(string status = "")
         {
             // get appointment details
             string sql =
@@ -61,12 +61,10 @@ namespace Desktop_44905165
 
             // populate datagridview
             handler.FillDataGridView(cmd, ref dgvAppointments);
+            dgvAppointments.Columns["ap_id"].Visible = false;
 
-            // no columns exist if no appointments exist
             if (dgvAppointments.Rows.Count != 0)
             {
-                //hide appointment id column
-                dgvAppointments.Columns["ap_id"].Visible = false;
                 cardActions.Enabled = true;
             }
             else
@@ -109,7 +107,7 @@ namespace Desktop_44905165
             int id = int.Parse(GetAppointmentValue("ap_id"));
             DateTime startDate = DateTime.Parse(GetAppointmentValue("Booking"));
 
-            // open date and time picker form
+            // create date and time picker form
             frmSelectDate selectDate = new frmSelectDate();
 
             // set initial date on select form
@@ -125,7 +123,7 @@ namespace Desktop_44905165
             else if (selectDate.newDate.Equals(startDate))
             {
                 // don't update record if the new date is the same
-                MessageBox.Show("Appointment updated", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Date and time stayed the same", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -336,6 +334,7 @@ namespace Desktop_44905165
             string email = cmbEmail.Text;
             string procedure = cmbProcedure.Text;
 
+            // validate date
             if (selectedDate < DateTime.Now)
             {
                 MessageBox.Show("Select an upcoming date and time", "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -430,16 +429,7 @@ namespace Desktop_44905165
                 hasError = true;
             }
 
-            if (hasError) return;
-
-            // get allergies - ensure no duplicates
-            HashSet<string> allergies = new HashSet<string>();
-
-            for (int i = 0; i < lstAllergies.Items.Count; i++)
-            {
-                allergies.Add(lstAllergies.Items[i].Text.ToString());
-            }
-           
+            if (hasError) return;       
 
             // create new patient
             string sqlPatient =
@@ -461,19 +451,19 @@ namespace Desktop_44905165
                 return;
             }
 
-            // get new patient's id to reduce query load in loop
+            // get new patient's id
             SqlCommand cmdID = new SqlCommand(@"select id from patient where email = @email", handler.conn);
             cmdID.Parameters.AddWithValue("@email", email);
 
             int patientID = int.Parse(handler.GetRowValues(cmdID)[0]);
 
             // add allergies
-            foreach (string allergy in allergies)
+            for (int i = 0; i < lstAllergies.Items.Count; i++)
             {
                 SqlCommand cmdAllergy = new SqlCommand(@"insert into allergy (patient_id, allergy) values (@patient_id, @allergy)", handler.conn);
 
                 cmdAllergy.Parameters.AddWithValue("@patient_id", patientID);
-                cmdAllergy.Parameters.AddWithValue("@allergy", allergy);
+                cmdAllergy.Parameters.AddWithValue("@allergy", lstAllergies.Items[i].Text);
 
                 handler.ExecuteInsert(cmdAllergy);
             }
@@ -499,6 +489,27 @@ namespace Desktop_44905165
                 errProvider.SetError(txtAllergy, "Required*");
                 return;
             }
+
+            // check if allergy is in list
+            bool hasValue = false;
+            int i = 0;
+            while (!hasValue && i < lstAllergies.Items.Count)
+            {
+                if (allergy.ToLower() == lstAllergies.Items[i].Text.ToLower())
+                {
+                    hasValue = true;
+                }
+
+                i++;
+            }
+
+            if (hasValue)
+            {
+                errProvider.SetError(txtAllergy, "Allergy already added*");
+                return;
+            }
+
+            errProvider.Clear();
 
             // add allergy to list box
             lstAllergies.Items.Add(new MaterialListBoxItem(allergy));
