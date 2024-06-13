@@ -48,7 +48,7 @@ namespace Desktop_44905165
             {
                 // uses sql select statement to fill referenced datagridview
                 conn.Open();     
-                
+               
                 ds.Clear();
 
                 adapter.SelectCommand = cmd;
@@ -117,7 +117,7 @@ namespace Desktop_44905165
                 cmd.Dispose();
 
                 conn.Close();
-
+                
                 return result;
             }
             catch (SqlException ex)
